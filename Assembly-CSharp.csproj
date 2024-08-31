@@ -64,11 +64,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player\PlayerPhysics.cs" />
-    <Compile Include="Assets\Player\PlayerAction.cs" />
-    <Compile Include="Assets\Player\JumpAction.cs" />
-    <Compile Include="Assets\Player\MoveAction.cs" />
-    <Compile Include="Assets\Player\PhysicsTester.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\PlayerAction.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\MoveAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
