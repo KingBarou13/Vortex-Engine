@@ -1,4 +1,6 @@
-# Vortex Engine - README
+![Vortex Engine Logo](https://github.com/user-attachments/assets/f881cfd9-21ca-4707-902d-5d7f8e29e3cd)
+
+# Vortex Engine
 
 ## Overview
 
