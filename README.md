@@ -1,4 +1,4 @@
-![Vortex Engine Logo](https://github.com/user-attachments/assets/f881cfd9-21ca-4707-902d-5d7f8e29e3cd)
+![Vortex Engine Logo](https://github.com/user-attachments/assets/dc5df27c-acaf-4728-915a-a9414671f535)
 
 # Vortex Engine
 
