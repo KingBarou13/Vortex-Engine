@@ -38,7 +38,7 @@ The Vortex Engine is specifically tailored to create a dynamic and fluid gamepla
 ## Setup and Usage
 
 ### Prerequisites
-- **Unity Version**: The Vortex Engine is built using Unity 2021.3 or later. Ensure you have the appropriate Unity version installed.
+- **Unity Version**: The Vortex Engine is built using Unity 2022.3.41f1 or later. Ensure you have the appropriate Unity version installed.
 - **Additional Assets**: Some assets may require Unity packages or external tools (e.g., ProBuilder, Cinemachine) for optimal performance.
 
 ### Installation
