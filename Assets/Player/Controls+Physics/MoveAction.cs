@@ -83,7 +83,7 @@ public class MoveAction : PlayerAction
             Vector3 velocity = Vector3.RotateTowards(playerPhysics.horizontalVelocity, moveVector * maxSpeed, maxRadDelta, maxDistDelta);
 
             velocity -= velocity * (Vector3.Angle(playerPhysics.horizontalVelocity, velocity) / 180 * turnDeceleration);
-            
+
             RB.velocity = velocity + playerPhysics.verticalVelocity;
         }
 

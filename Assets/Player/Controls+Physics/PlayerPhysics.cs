@@ -21,7 +21,7 @@ public class PlayerPhysics : MonoBehaviour
     public Action onPlayerPhysicsUpdate;
 
     void FixedUpdate() 
-    { 
+    {
         onPlayerPhysicsUpdate?.Invoke();
 
         if(!groundInfo.ground)
