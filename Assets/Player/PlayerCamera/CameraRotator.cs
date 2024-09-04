@@ -7,24 +7,30 @@ using static UnityEngine.GraphicsBuffer;
 public class CameraRotator : MonoBehaviour
 {
     public Transform TargetCameraTransform, PlayerMover;
+    public Collider PlayerCollider;
     public float MovementLerpSpeed, RotationlerpSpeed;
     public bool OnlyRotateOnYAxis, UseLookAtRotation;
     public bool LerpedMovement, LerpedRotation;
-    public float CameraMoveSpeed, CameraRotateSpeed;
+    public float CameraMoveSpeed, CameraRotateSpeed, BaseRot, DistToAct;
     public float FloorDistance;
+    public float PlayerViewRange;
+    int CollidingObjects = 0;
 
-    void Update() //Start function
+    void FixedUpdate() //Start function
     {
-        if (LerpedMovement)
+        float PlayerDist = Vector3.Distance(PlayerMover.position, transform.position);
+        if (PlayerDist > PlayerViewRange)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, MovementLerpSpeed);
+            if (LerpedMovement)
+            {
+                transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, MovementLerpSpeed);
+            }
+            else
+            {
+                float step = CameraMoveSpeed * CameraMoveSpeed;
+                transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, step * Vector3.Distance(transform.position, TargetCameraTransform.position));
+            }
         }
-        else
-        {
-            float step = CameraMoveSpeed * CameraMoveSpeed;
-            transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, step * Vector3.Distance(transform.position, TargetCameraTransform.position));
-        }
-        UpdateCameraPos();
         if (!UseLookAtRotation)
         {
             Quaternion SampleRot = Quaternion.Lerp(transform.localRotation, PlayerMover.localRotation, RotationlerpSpeed);
@@ -52,20 +58,49 @@ public class CameraRotator : MonoBehaviour
             }
             else
             {
-                float step = Mathf.Pow(CameraRotateSpeed, 2);
-                transform.rotation = Quaternion.Lerp(PrevRot, transform.rotation, step * Vector3.Distance(Quaternion.ToEulerAngles(PrevRot), transform.eulerAngles));
+                float DistFromCentre = GetDistanceFromScreenCenter(PlayerMover.position, GetComponent<Camera>()) + BaseRot;
+                float step = CameraRotateSpeed * Vector3.Distance(PlayerMover.position, transform.position) / DistToAct;
+                transform.rotation = Quaternion.Lerp(PrevRot, transform.rotation, step);
             }
         }
+        UpdateCameraPos();
     }
 
     void UpdateCameraPos()
     {
-        float MaxDistance = Vector3.Distance(transform.position, PlayerMover.position);
-        Vector3 direction = (transform.position - PlayerMover.position).normalized;
-        RaycastHit hit;
-        if (Physics.Raycast(PlayerMover.transform.position, direction, out hit, MaxDistance))
+        float MaxDistance = Vector3.Distance(TargetCameraTransform.position, PlayerMover.position);
+        Vector3 direction = (TargetCameraTransform.position - PlayerMover.position).normalized;
+        if (CollidingObjects > 0 && Physics.Raycast(PlayerMover.transform.position, direction, out RaycastHit hit, MaxDistance))
         {
             transform.position = PlayerMover.position + direction * (hit.distance - FloorDistance);
         }
+    }
+
+    float GetDistanceFromScreenCenter(Vector3 worldPosition, Camera cam)
+    {
+        // Get the object's position in screen space
+        Vector3 screenPos = cam.WorldToScreenPoint(worldPosition);
+
+        // Get the center of the screen
+        Vector2 screenCenter = new(Screen.width / 2f, Screen.height / 2f);
+
+        // Calculate the distance from the object's screen position to the center of the screen
+        float distanceX = screenPos.x - screenCenter.x;
+        float distanceY = screenPos.y - screenCenter.y;
+
+        // Use the Pythagorean theorem to find the distance
+        return Mathf.Sqrt(distanceX * distanceX + distanceY * distanceY);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == PlayerCollider) return;
+        CollidingObjects++;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == PlayerCollider) return;
+        CollidingObjects--;
     }
 }
