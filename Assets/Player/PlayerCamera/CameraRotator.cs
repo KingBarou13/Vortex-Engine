@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,90 +7,74 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CameraRotator : MonoBehaviour
 {
-    public Transform TargetCameraTransform, PlayerMover;
+    public Transform OriginTransform, PlayerMover, ParentTransform;
     public Collider PlayerCollider;
-    public float MovementLerpSpeed, RotationlerpSpeed;
-    public bool OnlyRotateOnYAxis, UseLookAtRotation;
-    public bool LerpedMovement, LerpedRotation;
-    public float CameraMoveSpeed, CameraRotateSpeed, BaseRot, DistToAct;
+    [Header("Anti-clipping")]
+    public float DistToAct;
     public float FloorDistance;
-    public float PlayerViewRange;
+    [Header("Smoothly Changing State")]
+    [Range(0, 1)]
+    public float LerpSpeed;
+    public float DistanceToReconnect;
+    [Header("Cinematic Camera Positions")]
     int CollidingObjects = 0;
+    [NonSerialized] public bool InCinematic = false;
+    bool PrevCinematic = false;
+    bool LerpingBack = false;
+    [NonSerialized] public Transform CinematicObject;
+    [Header("Returning From Cinematics")]
+    float CurrentLerpSpeed;
+    public float ReturnSpeed;
 
-    void FixedUpdate() //Start function
+    private void Start()
     {
-        float PlayerDist = Vector3.Distance(PlayerMover.position, transform.position);
-        if (PlayerDist > PlayerViewRange)
+        CurrentLerpSpeed = LerpSpeed;
+    }
+
+    void Update() //Start function
+    {
+        OriginTransform.position = PlayerMover.position;
+        if (InCinematic)
         {
-            if (LerpedMovement)
-            {
-                transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, MovementLerpSpeed);
-            }
-            else
-            {
-                float step = CameraMoveSpeed * CameraMoveSpeed;
-                transform.position = Vector3.Lerp(transform.position, TargetCameraTransform.position, step * Vector3.Distance(transform.position, TargetCameraTransform.position));
-            }
-        }
-        if (!UseLookAtRotation)
-        {
-            Quaternion SampleRot = Quaternion.Lerp(transform.localRotation, PlayerMover.localRotation, RotationlerpSpeed);
-            if (OnlyRotateOnYAxis)
-            {
-                SampleRot.x = 0;
-                SampleRot.z = 0;
-                SampleRot.w = 0;
-            }
-            transform.localRotation = SampleRot;
+            PrevCinematic = true;
+            transform.position = Vector3.Lerp(transform.position, CinematicObject.position, LerpSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, CinematicObject.rotation, LerpSpeed);
         }
         else
         {
-            /*
-            Vector3 DirectionToPlayer = PlayerMover.position - TargetCameraTransform.position;
-            Quaternion LookRot = Quaternion.LookRotation(DirectionToPlayer, Vector3.up);
-            Quaternion SampleRot = Quaternion.Lerp(transform.rotation, LookRot, RotationlerpSpeed);
-            transform.rotation = SampleRot;
-            */
-            Quaternion PrevRot = transform.rotation;
-            transform.LookAt(PlayerMover, Vector3.up);
-            if (LerpedRotation)
+            if (!PrevCinematic && !LerpingBack)
             {
-                transform.rotation = Quaternion.Lerp(PrevRot, transform.rotation, RotationlerpSpeed);
+                transform.position = ParentTransform.position;
+                transform.rotation = ParentTransform.rotation;
             }
-            else
+            else if (PrevCinematic)
             {
-                float DistFromCentre = GetDistanceFromScreenCenter(PlayerMover.position, GetComponent<Camera>()) + BaseRot;
-                float step = CameraRotateSpeed * Vector3.Distance(PlayerMover.position, transform.position) / DistToAct;
-                transform.rotation = Quaternion.Lerp(PrevRot, transform.rotation, step);
+                PrevCinematic = false;
+                LerpingBack = true;
+            }
+            else if (LerpingBack)
+            {
+                CurrentLerpSpeed = Mathf.Lerp(CurrentLerpSpeed, 1, ReturnSpeed / Vector3.Distance(transform.position, ParentTransform.position));
+                transform.position = Vector3.Lerp(transform.position, ParentTransform.position, CurrentLerpSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, ParentTransform.rotation, CurrentLerpSpeed);
+            }
+            if (Vector3.Distance(transform.position, ParentTransform.position) < DistanceToReconnect)
+            {
+                LerpingBack = false;
+                CurrentLerpSpeed = LerpSpeed;
             }
         }
-        UpdateCameraPos();
+        //UpdateCameraPos();
     }
 
     void UpdateCameraPos()
     {
-        float MaxDistance = Vector3.Distance(TargetCameraTransform.position, PlayerMover.position);
-        Vector3 direction = (TargetCameraTransform.position - PlayerMover.position).normalized;
+        float MaxDistance = Vector3.Distance(transform.position, PlayerMover.position);
+        Vector3 direction = (transform.position - PlayerMover.position).normalized;
         if (CollidingObjects > 0 && Physics.Raycast(PlayerMover.transform.position, direction, out RaycastHit hit, MaxDistance))
         {
             transform.position = PlayerMover.position + direction * (hit.distance - FloorDistance);
         }
-    }
-
-    float GetDistanceFromScreenCenter(Vector3 worldPosition, Camera cam)
-    {
-        // Get the object's position in screen space
-        Vector3 screenPos = cam.WorldToScreenPoint(worldPosition);
-
-        // Get the center of the screen
-        Vector2 screenCenter = new(Screen.width / 2f, Screen.height / 2f);
-
-        // Calculate the distance from the object's screen position to the center of the screen
-        float distanceX = screenPos.x - screenCenter.x;
-        float distanceY = screenPos.y - screenCenter.y;
-
-        // Use the Pythagorean theorem to find the distance
-        return Mathf.Sqrt(distanceX * distanceX + distanceY * distanceY);
     }
 
     private void OnTriggerEnter(Collider other)
