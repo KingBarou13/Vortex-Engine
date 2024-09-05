@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MoveAction : PlayerAction
 {
-    //On Move
-
+    // On Move
     Vector2 move;
 
     public void OnMove(InputAction.CallbackContext callbackContext)
@@ -13,22 +12,20 @@ public class MoveAction : PlayerAction
         move = callbackContext.ReadValue<Vector2>();
     }
 
-    //On Enable
+    // On Enable
     void OnEnable()
     {
         playerPhysics.onPlayerPhysicsUpdate += Move;
     }
 
-    //On Disable
+    // On Disable
     void OnDisable()
     {
         playerPhysics.onPlayerPhysicsUpdate -= Move;
     }
 
-    //Move
-
+    // Movement Settings
     [SerializeField] Transform cameraTransform;
-
     [SerializeField] float acceleration;
     [SerializeField] float deceleration;
     [SerializeField] float maxSpeed;
@@ -39,41 +36,63 @@ public class MoveAction : PlayerAction
     [SerializeField, Range(0, 1)] float softBrakeThreshold;
     [SerializeField] float brakeThreshold;
     [SerializeField] float brakeTime;
+
+    [SerializeField] private Animator animator;
+
     bool braking;
     float brakeTimer;
 
+    // Move function
     void Move()
     {
         Vector3 moveVector = GetMoveVector(cameraTransform, groundInfo.normal, move);
 
+        float currentSpeed = playerPhysics.speed;
+
+        animator.SetFloat("Speed", currentSpeed);
+
+        animator.speed = Mathf.Clamp(currentSpeed / maxSpeed, 0.5f, 2f);
+       
         bool wasBraking = braking;
 
-        braking = groundInfo.ground;
+        // Check if the player is braking
+        braking = groundInfo.ground && playerPhysics.speed > RB.sleepThreshold &&
+                  ((braking && brakeTimer > 0) || Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity) < -brakeThreshold);
 
-        braking &= playerPhysics.speed > RB.sleepThreshold;
-
-        braking &= (braking && brakeTimer > 0 && brakeTimer > 0) 
-            || Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity) <  -brakeThreshold;
-
-        if(braking)
+        if (braking)
+        {
             brakeTimer -= Time.deltaTime;
+        }
 
-        if(braking && !wasBraking)
+        // Reset brake timer if we start braking
+        if (braking && !wasBraking)
+        {
             brakeTimer = brakeTime;
+        }
 
-        if(braking)
+        // Apply braking or acceleration logic
+        if (braking)
+        {
             Decelerate(brakeSpeed);
-        else if(move.magnitude > 0)
-        {  
-            if(Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))  
+        }
+        else if (move.magnitude > 0)
+        {
+            // Check the direction of movement and only accelerate if we're moving in the same direction or stopping soft-braking.
+            if (Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))
+            {
                 Accelerate(acceleration);
+            }
             else
+            {
                 Decelerate(brakeSpeed);
+            }
         }
         else
+        {
             Decelerate(deceleration);
+        }
 
-
+        // Acceleration function
         void Accelerate(float speed)
         {
             float maxRadDelta = Mathf.Lerp(minTurnSpeed, maxTurnSpeed, playerPhysics.speed / maxSpeed) * Mathf.PI * Time.deltaTime;
@@ -87,25 +106,23 @@ public class MoveAction : PlayerAction
             RB.velocity = velocity + playerPhysics.verticalVelocity;
         }
 
+        // Deceleration function
         void Decelerate(float speed)
         {
             RB.velocity = Vector3.MoveTowards(playerPhysics.horizontalVelocity, Vector3.zero, speed * Time.deltaTime)
-                + playerPhysics.verticalVelocity;
+                          + playerPhysics.verticalVelocity;
         }
     }
 
-    //Get Move Vector
-
-    Vector3 GetMoveVector(Transform realtiveTo, Vector3 upNormal, Vector2 move)
+    // Get Move Vector function
+    Vector3 GetMoveVector(Transform relativeTo, Vector3 upNormal, Vector2 move)
     {
-        Vector3 rightNormal = Vector3.Cross(upNormal, realtiveTo.forward);
-
-        Vector3 forwardNormal = Vector3.Cross(realtiveTo.right, upNormal);
+        Vector3 rightNormal = Vector3.Cross(upNormal, relativeTo.forward);
+        Vector3 forwardNormal = Vector3.Cross(relativeTo.right, upNormal);
 
         Vector3.OrthoNormalize(ref upNormal, ref forwardNormal, ref rightNormal);
 
         Debug.DrawRay(RB.transform.position, rightNormal * 10, Color.red);
-
         Debug.DrawRay(RB.transform.position, forwardNormal * 10, Color.green);
 
         return (rightNormal * move.x) + (forwardNormal * move.y);
