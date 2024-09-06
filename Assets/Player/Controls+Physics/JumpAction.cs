@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class JumpAction : PlayerAction
 {
-    
-
     //On Jump
     public void OnJump(InputAction.CallbackContext callbackContext)
     {
@@ -19,7 +17,6 @@ public class JumpAction : PlayerAction
     }
 
     //On Disable
-
     void OnDisable()
     {
         playerPhysics.onGroundEnter -= OnGroundEnter;
@@ -29,15 +26,14 @@ public class JumpAction : PlayerAction
     void OnGroundEnter()
     {
         currentJumps = jumps;
+        animator.SetBool("IsJumping", false);  // Reset jumping state when grounded
     }
 
-
     //Jump
-
     [SerializeField] int jumps;
     [SerializeField] float jumpForce;
-
     [SerializeField] float airJumpForce;
+    [SerializeField] private Animator animator;  // Animator reference for triggering animations
 
     int currentJumps;
 
@@ -45,11 +41,13 @@ public class JumpAction : PlayerAction
     {
         if (currentJumps <= 0) return;
 
-        currentJumps --;
+        currentJumps--;
 
         float jumpForce = groundInfo.ground ? this.jumpForce : airJumpForce;
 
         RB.velocity = (groundInfo.normal * jumpForce)
         + playerPhysics.horizontalVelocity;
+
+        animator.SetBool("IsJumping", true);  // Trigger jump animation
     }
 }

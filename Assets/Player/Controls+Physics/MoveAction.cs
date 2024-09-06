@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,6 +40,18 @@ public class MoveAction : PlayerAction
 
     bool braking;
     float brakeTimer;
+
+    // Public method to check if braking
+    public bool IsBraking()
+    {
+        return braking;
+    }
+
+    // Reference for external scripts to get the move vector
+    public Vector3 GetMoveVector()
+    {
+        return GetMoveVector(cameraTransform, groundInfo.normal, move);
+    }
 
     // Move function
     void Move()

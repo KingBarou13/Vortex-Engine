@@ -366,6 +366,7 @@
 "Assets/Player/Controls+Physics/PhysicsTester.cs"
 "Assets/Player/Controls+Physics/PlayerAction.cs"
 "Assets/Player/Controls+Physics/PlayerPhysics.cs"
+"Assets/Player/Controls+Physics/RotationHandler.cs"
 -langversion:9.0
 /deterministic
 /optimize+

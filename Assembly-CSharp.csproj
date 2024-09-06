@@ -68,6 +68,7 @@
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
     <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
     <Compile Include="Assets\Player\Controls+Physics\MoveAction.cs" />
   </ItemGroup>
   <ItemGroup>
