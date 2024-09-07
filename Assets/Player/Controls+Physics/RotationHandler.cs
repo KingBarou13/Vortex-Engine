@@ -3,9 +3,9 @@ using UnityEngine;
 public class RotationHandler : MonoBehaviour
 {
     [SerializeField] private Transform player; // The child object (player) to rotate
-    [SerializeField] private MoveAction moveAction; // Reference to the MoveAction script
+    [SerializeField] private MoveAction moveAction;
 
-    [SerializeField] private float rotationSpeed = 5f; // Speed at which the object rotates
+    [SerializeField] private float rotationSpeed = 5f;
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class RotationHandler : MonoBehaviour
         // Get the current move vector from the MoveAction script
         Vector3 moveVector = moveAction.GetMoveVector();
 
-        // Only rotate if there is movement and we are not braking
+        // Only rotate if there is movement and not braking
         if (moveVector.sqrMagnitude > 0)
         {
             RotatePlayer(moveVector);

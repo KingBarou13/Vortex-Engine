@@ -47,7 +47,6 @@ public class MoveAction : PlayerAction
         return braking;
     }
 
-    // Reference for external scripts to get the move vector
     public Vector3 GetMoveVector()
     {
         return GetMoveVector(cameraTransform, groundInfo.normal, move);
@@ -66,7 +65,7 @@ public class MoveAction : PlayerAction
        
         bool wasBraking = braking;
 
-        // Check if the player is braking
+        // Check if braking
         braking = groundInfo.ground && playerPhysics.speed > RB.sleepThreshold &&
                   ((braking && brakeTimer > 0) || Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity) < -brakeThreshold);
 
@@ -75,7 +74,7 @@ public class MoveAction : PlayerAction
             brakeTimer -= Time.deltaTime;
         }
 
-        // Reset brake timer if we start braking
+        // Reset brake timer if starting to brake
         if (braking && !wasBraking)
         {
             brakeTimer = brakeTime;
@@ -88,7 +87,7 @@ public class MoveAction : PlayerAction
         }
         else if (move.magnitude > 0)
         {
-            // Check the direction of movement and only accelerate if we're moving in the same direction or stopping soft-braking.
+            
             if (Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))
             {
                 Accelerate(acceleration);

@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Target
+  - Rail
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Rails
   - Water
   - UI
   - 
