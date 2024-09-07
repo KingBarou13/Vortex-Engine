@@ -367,6 +367,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Player/Controls+Physics/JumpAction.cs"
 "Assets/Player/Controls+Physics/MoveAction.cs"
+"Assets/Player/Controls+Physics/NearestTargetFinder.cs"
 "Assets/Player/Controls+Physics/PhysicsTester.cs"
 "Assets/Player/Controls+Physics/PlayerAction.cs"
 "Assets/Player/Controls+Physics/PlayerPhysics.cs"

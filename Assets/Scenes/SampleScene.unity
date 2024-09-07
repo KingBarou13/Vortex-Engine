@@ -1999,6 +1999,7 @@ GameObject:
   - component: {fileID: 1172153684}
   - component: {fileID: 1172153683}
   - component: {fileID: 1172153685}
+  - component: {fileID: 1172153686}
   m_Layer: 0
   m_Name: Rigidbody
   m_TagString: Untagged
@@ -2082,6 +2083,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 5
   displayText: {fileID: 626724607}
+--- !u!114 &1172153686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172153681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0b517ddd708924281b7bc8c2b6cb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: Target
+  nearestTarget: {fileID: 0}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  maxRange: 30
+  mainCamera: {fileID: 963194227}
 --- !u!1 &1198729817
 GameObject:
   m_ObjectHideFlags: 0

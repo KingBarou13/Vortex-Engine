@@ -69,6 +69,7 @@
     <Compile Include="Assets\Player\Controls+Physics\RailGrindAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
     <Compile Include="Assets\Player\Controls+Physics\MoveAction.cs" />
@@ -938,16 +939,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
