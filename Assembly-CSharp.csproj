@@ -66,11 +66,9 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Controls+Physics\PlayerAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
-    <Compile Include="Assets\Player\Controls+Physics\RailGrindAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
-    <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
     <Compile Include="Assets\Player\Controls+Physics\MoveAction.cs" />
   </ItemGroup>
