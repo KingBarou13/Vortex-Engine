@@ -27,7 +27,6 @@ public class NearestTargetFinder : MonoBehaviour
     {
         if (mainCamera == null)
         {
-            Debug.LogWarning("Main camera is not assigned.");
             return;
         }
 
@@ -36,10 +35,6 @@ public class NearestTargetFinder : MonoBehaviour
         if (targets.Length == 0)
         {
             nearestTarget = null;
-            if (Application.isPlaying)
-            {
-                Debug.LogWarning("No targets found with the tag: " + targetTag);
-            }
             return;
         }
 
@@ -65,18 +60,10 @@ public class NearestTargetFinder : MonoBehaviour
         if (closestTarget != null && minDistance <= maxRange)
         {
             nearestTarget = closestTarget.transform;
-            if (Application.isPlaying)
-            {
-                Debug.Log("Nearest target found at: " + nearestTarget.position);
-            }
         }
         else
         {
             nearestTarget = null;
-            if (Application.isPlaying)
-            {
-                Debug.LogWarning("No target within range.");
-            }
         }
     }
 
@@ -86,17 +73,6 @@ public class NearestTargetFinder : MonoBehaviour
         {
             Gizmos.color = lineColor;
             Gizmos.DrawLine(transform.position, nearestTarget.position);
-            if (Application.isPlaying)
-            {
-                Debug.Log("Drawing Gizmo line from " + transform.position + " to " + nearestTarget.position);
-            }
-        }
-        else
-        {
-            if (Application.isPlaying)
-            {
-                Debug.Log("No nearest target to draw Gizmo line.");
-            }
         }
     }
 }
