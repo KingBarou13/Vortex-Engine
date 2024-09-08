@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Controls+Physics\PlayerAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
     <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
