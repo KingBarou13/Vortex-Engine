@@ -4,7 +4,7 @@
 
 ## Overview
 
-Welcome to the **Vortex Engine**, a custom-built framework designed in Unity for high-speed platforming and flashy combat. This engine draws inspiration from games like *Sonic Unleashed*, *Sonic Frontiers*, and *Zenless Zone Zero* and serves as the foundation for the fangame *Sonic X Shadow: Rise of The Beasts*.
+Welcome to the **Vortex Engine**, a custom-built framework designed in Unity for high-speed platforming and flashy combat.
 
 The Vortex Engine is specifically tailored to create a dynamic and fluid gameplay experience, combining the thrill of speed with the depth of combat mechanics. While this framework is not intended for public distribution, it is designed to be modular, allowing for easy customization and expansion as the project evolves.
 
