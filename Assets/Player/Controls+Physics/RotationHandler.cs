@@ -3,7 +3,7 @@ using UnityEngine;
 public class RotationHandler : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Transform referenceObject;  // Object whose up direction we want to match
+    [SerializeField] private Transform referenceObject;
     [SerializeField] private float forwardRange = 5;
     [SerializeField] private float upRange = 5;
     [SerializeField] private MoveAction moveAction;
