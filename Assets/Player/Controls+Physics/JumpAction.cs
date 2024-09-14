@@ -26,14 +26,14 @@ public class JumpAction : PlayerAction
     void OnGroundEnter()
     {
         currentJumps = jumps;
-        animator.SetBool("IsJumping", false);  // Reset jumping state when grounded
+        animator.SetBool("IsJumping", false);
     }
 
     //Jump
     [SerializeField] int jumps;
     [SerializeField] float jumpForce;
     [SerializeField] float airJumpForce;
-    [SerializeField] private Animator animator;  // Animator reference for triggering animations
+    [SerializeField] private Animator animator;
 
     int currentJumps;
 
@@ -48,6 +48,6 @@ public class JumpAction : PlayerAction
         RB.velocity = (groundInfo.normal * jumpForce)
         + playerPhysics.horizontalVelocity;
 
-        animator.SetBool("IsJumping", true);  // Trigger jump animation
+        animator.SetBool("IsJumping", true);
     }
 }

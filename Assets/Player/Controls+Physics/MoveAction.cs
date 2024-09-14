@@ -59,12 +59,11 @@ public class MoveAction : PlayerAction
         float currentSpeed = playerPhysics.speed;
 
         animator.SetFloat("Speed", currentSpeed);
-
         animator.speed = Mathf.Clamp(currentSpeed / maxSpeed, 0.5f, 2f);
-       
+
         bool wasBraking = braking;
 
-        // Check if braking
+        
         braking = groundInfo.ground && playerPhysics.speed > RB.sleepThreshold &&
                   ((braking && brakeTimer > 0) || Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity) < -brakeThreshold);
 
@@ -73,32 +72,36 @@ public class MoveAction : PlayerAction
             brakeTimer -= Time.deltaTime;
         }
 
-        // Reset brake timer if starting to brake
+        
         if (braking && !wasBraking)
         {
             brakeTimer = brakeTime;
         }
 
-        // Apply braking or acceleration logic
+        
         if (braking)
         {
+            animator.SetBool("IsBraking", true);
             Decelerate(brakeSpeed);
-        }
-        else if (move.magnitude > 0)
-        {
-            
-            if (Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))
-            {
-                Accelerate(acceleration);
-            }
-            else
-            {
-                Decelerate(brakeSpeed);
-            }
         }
         else
         {
-            Decelerate(deceleration);
+            animator.SetBool("IsBraking", false); 
+            if (move.magnitude > 0)
+            {
+                if (Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))
+                {
+                    Accelerate(acceleration);
+                }
+                else
+                {
+                    Decelerate(brakeSpeed);
+                }
+            }
+            else
+            {
+                Decelerate(deceleration);
+            }
         }
 
         // Acceleration function
