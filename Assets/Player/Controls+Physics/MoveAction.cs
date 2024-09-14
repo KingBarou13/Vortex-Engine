@@ -40,8 +40,7 @@ public class MoveAction : PlayerAction
 
     bool braking;
     float brakeTimer;
-
-    // Public method to check if braking
+    
     public bool IsBraking()
     {
         return braking;

@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class RotationHandler : MonoBehaviour
 {
-    [SerializeField] private Transform player; // The child object (player) to rotate
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform referenceObject;  // Object whose up direction we want to match
+    [SerializeField] private float forwardRange = 5;
+    [SerializeField] private float upRange = 5;
     [SerializeField] private MoveAction moveAction;
 
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 10f;
 
     void Update()
     {
@@ -23,18 +26,31 @@ public class RotationHandler : MonoBehaviour
         {
             RotatePlayer(moveVector);
         }
+
+        CheckForwardDirection();
+        CheckUpDirection();
     }
 
     void RotatePlayer(Vector3 moveDirection)
     {
-        // Get the target rotation based on the movement direction
-        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-        Vector3 targetEuler = targetRotation.eulerAngles;
+        // Create a rotation that faces the moveDirection but aligns the up direction to the reference object's up
+        Quaternion targetRotation = Quaternion.LookRotation(moveDirection, referenceObject.up);
 
-        // Apply only y-axis rotation
-        Quaternion newRotation = Quaternion.Euler(0, targetEuler.y, 0);
+        // Smoothly rotate the player towards the target direction
+        player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
 
-        // Rotate the player smoothly towards the target direction
-        player.rotation = Quaternion.Slerp(player.rotation, newRotation, rotationSpeed * Time.deltaTime);
+    void CheckForwardDirection()
+    {
+        Vector3 forwardDirection = Vector3.forward;
+        Ray forwardRay = new Ray(transform.position, transform.TransformDirection(forwardDirection * forwardRange));
+        Debug.DrawRay(transform.position, transform.TransformDirection(forwardDirection * forwardRange), Color.blue);
+    }
+
+    void CheckUpDirection()
+    {
+        Vector3 upDirection = Vector3.up;
+        Ray upRay = new Ray(transform.position, transform.TransformDirection(upDirection * upRange));
+        Debug.DrawRay(transform.position, transform.TransformDirection(upDirection * upRange), Color.blue);
     }
 }

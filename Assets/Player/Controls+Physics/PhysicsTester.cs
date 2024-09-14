@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class PhysicsTester : MonoBehaviour
 {
-    public float range = 5f;
     private float upDownAngle;
     public Text displayText; // Reference to the UI Text component
 
@@ -17,16 +16,8 @@ public class PhysicsTester : MonoBehaviour
 
     void Update()
     {
-        CheckDirection();
         CalculateUpDownAngle();
         UpdateDisplayText();
-    }
-
-    void CheckDirection()
-    {
-        Vector3 direction = Vector3.forward;
-        Ray theRay = new Ray(transform.position, transform.TransformDirection(direction * range));
-        Debug.DrawRay(transform.position, transform.TransformDirection(direction * range), Color.red);
     }
 
     void CalculateUpDownAngle()

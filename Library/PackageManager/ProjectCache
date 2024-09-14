@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638613079756823597
-    m_Hash: 3651449761
+      ticks: 638618599423057462
+    m_Hash: 17960479
   m_LockFileStatus:
     m_FilePath: C:/Users/musun/Code/Unity Projects/Vortex Engine/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638613079756888106
-    m_Hash: 3316879657
+      ticks: 638618599423125519
+    m_Hash: 3340228496
 m_EmbeddedPackageManifests:
   m_ManifestsStatus:
     C:/Users/musun/Code/Unity Projects/Vortex Engine/Packages/com.baracuda.runtime-monitoring/package.json:
@@ -515,6 +515,7 @@ m_ResolvedPackages:
     - 1.8.2
     - 1.9.0
     - 1.10.0
+    - 1.11.0
     compatible:
     - 1.7.0
     - 1.8.0-pre.1
@@ -524,6 +525,7 @@ m_ResolvedPackages:
     - 1.8.2
     - 1.9.0
     - 1.10.0
+    - 1.11.0
     recommended: 1.7.0
     deprecated: []
   dependencies:
@@ -567,6 +569,154 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.7.0
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  fingerprint: 
+- packageId: com.unity.probuilder@5.2.3
+  testable: 0
+  isDirectDependency: 1
+  version: 5.2.3
+  source: 1
+  resolvedPath: C:\Users\musun\Code\Unity Projects\Vortex Engine\Library\PackageCache\com.unity.probuilder@5.2.3
+  assetPath: Packages/com.unity.probuilder
+  name: com.unity.probuilder
+  displayName: ProBuilder
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: asset
+  description: 'Build, edit, and texture custom geometry in Unity. Use ProBuilder
+    for in-scene level design, prototyping, collision meshes, all with on-the-fly
+    play-testing.
+
+
+    Advanced features include UV editing, vertex colors, parametric
+    shapes, and texture blending. With ProBuilder''s model export feature it''s easy
+    to tweak your levels in any external 3D modelling suite.
+
+
+    If you are using
+    URP/HDRP, be careful to also import the corresponding sample project in the section
+    below to get the proper materials.'
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 3.0.0
+    - 3.0.1
+    - 3.0.2
+    - 3.0.3
+    - 3.0.6
+    - 3.0.8
+    - 3.0.9
+    - 3.10.1
+    - 4.0.2
+    - 4.0.3
+    - 4.0.4
+    - 4.0.5
+    - 4.1.0
+    - 4.1.2
+    - 4.2.1
+    - 4.2.2-preview.1
+    - 4.2.2-preview.2
+    - 4.2.3
+    - 4.2.4-preview.0
+    - 4.3.0-preview.0
+    - 4.3.0-preview.1
+    - 4.3.0-preview.2
+    - 4.3.0-preview.4
+    - 4.3.0-preview.6
+    - 4.3.0-preview.7
+    - 4.3.0-preview.8
+    - 4.3.0-preview.9
+    - 4.3.1
+    - 4.4.0-preview.1
+    - 4.4.0
+    - 4.5.0
+    - 4.5.2
+    - 5.0.0-pre.7
+    - 5.0.0-pre.10
+    - 5.0.1
+    - 5.0.3
+    - 5.0.4
+    - 5.0.6
+    - 5.0.7
+    - 5.1.0
+    - 5.1.1
+    - 5.2.0
+    - 5.2.2
+    - 5.2.3
+    - 6.0.1-pre.1
+    - 6.0.1-pre.2
+    - 6.0.1
+    - 6.0.2
+    - 6.0.3
+    compatible:
+    - 5.2.2
+    - 5.2.3
+    recommended: 5.2.3
+    deprecated: []
+  dependencies:
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.settings-manager
+    version: 1.0.3
+  resolvedDependencies:
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.settings-manager
+    version: 2.0.1
+  keywords:
+  - 3d
+  - model
+  - mesh
+  - modeling
+  - geometry
+  - shape
+  - cube
+  - blender
+  - max
+  - maya
+  - fbx
+  - obj
+  - level
+  - design
+  - block
+  - greybox
+  - graybox
+  - whitebox
+  - prototype
+  - probuilder
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638592476130000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.probuilder@5.2/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.com/Unity-Technologies/com.unity.probuilder.git
+    revision: 4dfe5d0a97cdea307668dae116b2b69982507cc1
+    path: 
+  unityLifecycle:
+    version: 5.2.2
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0

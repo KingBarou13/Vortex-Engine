@@ -159,8 +159,8 @@
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Systems\ValidatorFactory.Static.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Systems\MonitoringLogger.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Attributes\MonitorPropertyAttribute.cs" />
-    <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Systems\MonitoringUpdateEvents.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Systems\MonitoringRegistry.cs" />
+    <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Systems\MonitoringUpdateEvents.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Core\Utilities\Reflection\AssemblyProfiler.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Types\MonitoredScriptableObject.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Runtime\Scripts\Attributes\MElementIndentAttribute.cs" />
