@@ -70,7 +70,9 @@
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
     <Compile Include="Assets\Player\Controls+Physics\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\GrindAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
     <Compile Include="Assets\Player\Controls+Physics\MoveAction.cs" />
   </ItemGroup>

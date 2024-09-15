@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysics: {fileID: 1172153683}
+  grindAction: {fileID: 1172153687}
   jumps: 2
   jumpForce: 24
   airJumpForce: 16
@@ -2042,6 +2043,7 @@ GameObject:
   - component: {fileID: 1172153683}
   - component: {fileID: 1172153685}
   - component: {fileID: 1172153686}
+  - component: {fileID: 1172153687}
   m_Layer: 0
   m_Name: Rigidbody
   m_TagString: Untagged
@@ -2141,6 +2143,24 @@ MonoBehaviour:
   lineColor: {r: 1, g: 0, b: 0, a: 1}
   maxRange: 30
   mainCamera: {fileID: 963194227}
+--- !u!114 &1172153687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172153681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18dff1204d48dfb42a3ce8d19d4630e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRail: 0
+  grindSpeed: 5
+  heightOffset: 0
+  lerpSpeed: 10
+  currentRailScript: {fileID: 1685158431}
+  animator: {fileID: 1369306369}
 --- !u!1 &1198729817
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,6 +2824,7 @@ GameObject:
   - component: {fileID: 1685158426}
   - component: {fileID: 1685158425}
   - component: {fileID: 1685158430}
+  - component: {fileID: 1685158431}
   m_Layer: 3
   m_Name: Spline
   m_TagString: Rail
@@ -2830,7 +2851,7 @@ MonoBehaviour:
   m_Sides: 8
   m_SegmentsPerUnit: 4
   m_Capped: 1
-  m_Radius: 1
+  m_Radius: 0.16
   m_Range: {x: 0, y: 1}
 --- !u!23 &1685158426
 MeshRenderer:
@@ -2953,53 +2974,53 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -7.1442604
+        z: -8.805447
       TangentOut:
         x: 0
         y: 0
-        z: 4.820962
+        z: 8.66537
       Rotation:
         value:
-          x: -0.041781735
-          y: 0.696763
-          z: 0.019130094
-          w: 0.71582794
+          x: -0.0402024
+          y: 0.6942442
+          z: 0.01781019
+          w: 0.7183951
     - Position:
-        x: 39.18943
-        y: 14.200005
-        z: 47.34027
+        x: 53.029762
+        y: 14.000004
+        z: 45.04373
       TangentIn:
         x: -0
         y: -0
-        z: -5.513812
+        z: -9.743319
       TangentOut:
         x: 0
         y: 0
-        z: 12.313235
+        z: 12.130559
       Rotation:
         value:
-          x: -0.0008974717
-          y: 0.67632085
-          z: -0.009643502
-          w: 0.7365435
+          x: 0.0076245624
+          y: 0.79559463
+          z: -0.01735087
+          w: 0.6055329
     - Position:
-        x: 97.22976
-        y: 12.800004
-        z: 69.34372
+        x: 91.329765
+        y: 11.300004
+        z: 30.543732
       TangentIn:
         x: -0
         y: -0
-        z: -9.251038
+        z: -8.642728
       TangentOut:
         x: 0
         y: 0
-        z: 10.120921
+        z: 8.133005
       Rotation:
         value:
-          x: -0.09507579
-          y: 0.9142805
-          z: -0.09542645
-          w: 0.38202837
+          x: -0.10835718
+          y: 0.97740984
+          z: -0.07955229
+          w: 0.1630952
     - Position:
         x: 73.329765
         y: 8.000004
@@ -3007,17 +3028,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -17.733057
+        z: -10.6711855
       TangentOut:
         x: 0
         y: 0
-        z: 10.044821
+        z: 8.643459
       Rotation:
         value:
-          x: -0.0033292081
-          y: 0.98408765
-          z: -0.102194525
-          w: -0.14531608
+          x: 0.00075245264
+          y: 0.97500944
+          z: -0.1112159
+          w: -0.19232047
     - Position:
         x: 67.52976
         y: 0.0000038146973
@@ -3099,6 +3120,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b594eda7ec4438b4cb77d89ed618e19c, type: 2}
+--- !u!114 &1685158431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685158424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b1f7b0fbf5ff94583b4e7cf97811f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalDir: 0
+  railSpline: {fileID: 1685158428}
+  totalSplineLength: 0
 --- !u!1 &1767070817
 GameObject:
   m_ObjectHideFlags: 0

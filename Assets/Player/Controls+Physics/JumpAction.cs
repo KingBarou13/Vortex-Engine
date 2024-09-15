@@ -3,51 +3,75 @@ using UnityEngine.InputSystem;
 
 public class JumpAction : PlayerAction
 {
-    //On Jump
-    public void OnJump(InputAction.CallbackContext callbackContext)
+    [SerializeField] private GrindAction grindAction;  // Reference to GrindAction, assign in Inspector if available
+
+    [SerializeField] int jumps;
+    [SerializeField] float jumpForce;
+    [SerializeField] float airJumpForce;
+    [SerializeField] private Animator animator;
+    int currentJumps;
+
+    void Start()
     {
-        if(callbackContext.performed)
-            Jump();
+        if (grindAction == null)
+        {
+            // Try finding GrindAction in parent or child objects
+            grindAction = GetComponentInParent<GrindAction>();
+
+            // If not found in parent, try children
+            if (grindAction == null)
+            {
+                grindAction = GetComponentInChildren<GrindAction>();
+            }
+        }
     }
 
-    //On Enable
+    public void OnJump(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Jump();
+        }
+    }
+
     void OnEnable()
     {
         playerPhysics.onGroundEnter += OnGroundEnter;
     }
 
-    //On Disable
     void OnDisable()
     {
         playerPhysics.onGroundEnter -= OnGroundEnter;
     }
 
-    //On Ground Enter
     void OnGroundEnter()
     {
         currentJumps = jumps;
         animator.SetBool("IsJumping", false);
     }
 
-    //Jump
-    [SerializeField] int jumps;
-    [SerializeField] float jumpForce;
-    [SerializeField] float airJumpForce;
-    [SerializeField] private Animator animator;
-
-    int currentJumps;
-
     void Jump()
     {
+        // Check if the player is on a rail before jumping
+        if (grindAction != null && grindAction.onRail)
+        {
+            // Exit the rail grind when jumping
+            grindAction.ExitRailOnJump();
+        }
+
+        // If out of jumps, return
         if (currentJumps <= 0) return;
 
+        // Decrement jump count
         currentJumps--;
 
-        float jumpForce = groundInfo.ground ? this.jumpForce : airJumpForce;
+        // Determine jump force based on whether the player is grounded or in the air
+        float appliedJumpForce = playerPhysics.groundInfo.ground ? jumpForce : airJumpForce;
 
-        RB.velocity = (groundInfo.normal * jumpForce)
-        + playerPhysics.horizontalVelocity;
+        // Apply vertical jump velocity, adding the player's current horizontal velocity
+        playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
 
+        // Update animator to indicate the player is jumping
         animator.SetBool("IsJumping", true);
     }
 }
