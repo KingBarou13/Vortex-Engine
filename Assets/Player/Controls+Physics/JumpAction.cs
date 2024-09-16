@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class JumpAction : PlayerAction
 {
-    [SerializeField] private GrindAction grindAction;  // Reference to GrindAction, assign in Inspector if available
+    [SerializeField] private GrindAction grindAction;  
 
     [SerializeField] int jumps;
     [SerializeField] float jumpForce;
@@ -15,10 +15,10 @@ public class JumpAction : PlayerAction
     {
         if (grindAction == null)
         {
-            // Try finding GrindAction in parent or child objects
+            
             grindAction = GetComponentInParent<GrindAction>();
 
-            // If not found in parent, try children
+            
             if (grindAction == null)
             {
                 grindAction = GetComponentInChildren<GrindAction>();
