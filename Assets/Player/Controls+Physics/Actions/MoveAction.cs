@@ -38,9 +38,17 @@ public class MoveAction : PlayerAction
 
     [SerializeField] private Animator animator;
 
+    [SerializeField] private ParticleSystem speedLines; // Reference to the speed lines particle system
+    [SerializeField] private float speedLineThreshold;  // Speed at which speed lines appear
+
+    [SerializeField] private Camera mainCamera;         // Reference to the main camera
+    [SerializeField] private float targetFOV = 90f;     // Target FOV when speed is high
+    [SerializeField] private float baseFOV = 60f;       // Base FOV when speed is low
+    [SerializeField] private float fovChangeSpeed = 2f; // Speed of FOV transition
+
     bool braking;
     float brakeTimer;
-    
+
     public bool IsBraking()
     {
         return braking;
@@ -61,9 +69,30 @@ public class MoveAction : PlayerAction
         animator.SetFloat("Speed", currentSpeed);
         animator.speed = Mathf.Clamp(currentSpeed / maxSpeed, 0.5f, 2f);
 
+        // Control the visibility of the speed lines based on the custom speed threshold
+        if (currentSpeed >= speedLineThreshold && !speedLines.isPlaying)
+        {
+            speedLines.Play();  // Start speed lines when the speed exceeds the threshold
+        }
+        else if (currentSpeed < speedLineThreshold && speedLines.isPlaying)
+        {
+            speedLines.Stop();  // Stop speed lines when speed falls below the threshold
+        }
+
+        // Adjust the camera's FOV when speed exceeds the threshold
+        if (currentSpeed >= speedLineThreshold)
+        {
+            // Smoothly transition to the target FOV
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, fovChangeSpeed * Time.deltaTime);
+        }
+        else
+        {
+            // Smoothly return to the base FOV
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, baseFOV, fovChangeSpeed * Time.deltaTime);
+        }
+
         bool wasBraking = braking;
 
-        
         braking = groundInfo.ground && playerPhysics.speed > RB.sleepThreshold &&
                   ((braking && brakeTimer > 0) || Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity) < -brakeThreshold);
 
@@ -72,13 +101,11 @@ public class MoveAction : PlayerAction
             brakeTimer -= Time.deltaTime;
         }
 
-        
         if (braking && !wasBraking)
         {
             brakeTimer = brakeTime;
         }
 
-        
         if (braking)
         {
             animator.SetBool("IsBraking", true);

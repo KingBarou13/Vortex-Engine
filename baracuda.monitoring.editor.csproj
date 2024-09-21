@@ -66,12 +66,12 @@
   <ItemGroup>
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\MonitoringSettingsWindow.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\InspectorUtilities.cs" />
-    <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\IL2CPPBuildExtensions.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\StatCounter.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\MenuItemLayout.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\MonitoringSettingsInspector.cs" />
-    <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\FoldoutHandler.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\IL2CPPBuildPreprocessor.cs" />
+    <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\IL2CPPBuildExtensions.cs" />
+    <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\FoldoutHandler.cs" />
     <Compile Include="Packages\com.baracuda.runtime-monitoring\Editor\MonitoringFilterWindow.cs" />
   </ItemGroup>
   <ItemGroup>
