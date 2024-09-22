@@ -395,6 +395,7 @@
 "Assets/Player/Controls+Physics/RailScript.cs"
 "Assets/Player/Controls+Physics/ReticleRotate.cs"
 "Assets/Player/Controls+Physics/RotationHandler.cs"
+"Assets/Stage Assets/MovingPlatform.cs"
 -langversion:9.0
 /deterministic
 /optimize+
