@@ -396,6 +396,7 @@
 "Assets/Player/Controls+Physics/ReticleRotate.cs"
 "Assets/Player/Controls+Physics/RotationHandler.cs"
 "Assets/Stage Assets/MovingPlatform.cs"
+"Assets/UI/Speedometer.cs"
 -langversion:9.0
 /deterministic
 /optimize+
