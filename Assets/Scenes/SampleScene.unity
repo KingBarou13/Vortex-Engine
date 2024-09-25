@@ -1130,18 +1130,15 @@ MonoBehaviour:
   acceleration: 25
   deceleration: 60
   maxSpeed: 150
-  slopeMaxSpeed: 250
   minTurnSpeed: 3
   maxTurnSpeed: 1
   turnDeceleration: 0.5
+  uphillDeceleration: 0.9
+  downhillAcceleration: 1.1
   brakeSpeed: 100
   softBrakeThreshold: 0.5
   brakeThreshold: 20
   brakeTime: 0.5
-  slopeRotation: 0
-  slopeAssistance: 1.5
-  slopeDrag: 1.5
-  isGoingUphill: 0
   animator: {fileID: 1369306369}
   speedLines: {fileID: 1123052856}
   speedLineThreshold: 120
@@ -1632,8 +1629,8 @@ Transform:
   m_GameObject: {fileID: 773932881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 624.29626, y: 4, z: -25.618807}
-  m_LocalScale: {x: 69.83, y: 8, z: 40}
+  m_LocalPosition: {x: 624.29626, y: 3.2, z: -25.618807}
+  m_LocalScale: {x: 69.83, y: 5.76, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -3,7 +3,12 @@ guid: ffc22b8693b11914fa02b1033c05261c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_spin_ball5
+    second: {fileID: 2100000, guid: 5d5e071956e435349875614445b2dd5b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

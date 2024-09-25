@@ -27,21 +27,17 @@ public class MoveAction : PlayerAction
     [SerializeField] Transform cameraTransform;
     [SerializeField] float acceleration;
     [SerializeField] float deceleration;
-    [SerializeField] float maxSpeed; //Max speed without the help of slopes
-    [SerializeField] private float slopeMaxSpeed; // Maximum speed using slopes
+    [SerializeField] float maxSpeed; 
     [SerializeField] float minTurnSpeed;
     [SerializeField] float maxTurnSpeed;
-    [SerializeField, Range(0, 1)] float turnDeceleration; 
+    [SerializeField, Range(0, 1)] float turnDeceleration;
+    [SerializeField] float uphillDeceleration;
+    [SerializeField] float downhillAcceleration;
+
     [SerializeField] float brakeSpeed;
     [SerializeField, Range(0, 1)] float softBrakeThreshold;
     [SerializeField] float brakeThreshold;
     [SerializeField] float brakeTime;
-
-    [Header("Slope Variables")]
-    [SerializeField] private float slopeRotation; // Angle of the slope
-    [SerializeField] private float slopeAssistance; // How much speed Sonic gains downhill
-    [SerializeField] private float slopeDrag; // How much speed Sonic loses uphill
-    [SerializeField] private bool isGoingUphill; //Checks whether Sonic is moving uphill or downhill
 
     [SerializeField] private Animator animator;
 
@@ -72,9 +68,6 @@ public class MoveAction : PlayerAction
         Vector3 moveVector = GetMoveVector(cameraTransform, groundInfo.normal, move);
 
         float currentSpeed = playerPhysics.speed;
-
-        slopeRotation = Vector3.Angle(Vector3.up, groundInfo.normal); // Get the slope's angle relative to the upward direction
-        isGoingUphill = Vector3.Dot(moveVector.normalized, groundInfo.normal) > 0; // True if going uphill, false if going downhill
 
         animator.SetFloat("Speed", currentSpeed);
         animator.speed = Mathf.Clamp(currentSpeed / maxSpeed, 0.5f, 2f);
@@ -145,15 +138,19 @@ public class MoveAction : PlayerAction
         void Accelerate(float speed)
         {
             float maxRadDelta = Mathf.Lerp(minTurnSpeed, maxTurnSpeed, playerPhysics.speed / maxSpeed) * Mathf.PI * Time.deltaTime;
-
             float maxDistDelta = speed * Time.deltaTime;
 
             Vector3 velocity = Vector3.RotateTowards(playerPhysics.horizontalVelocity, moveVector * maxSpeed, maxRadDelta, maxDistDelta);
-
+            
             velocity -= velocity * (Vector3.Angle(playerPhysics.horizontalVelocity, velocity) / 180 * turnDeceleration);
             
+            float dot = Vector3.Dot(velocity.normalized, Vector3.up); 
+            float slopeFactor = dot > 0 ? -uphillDeceleration : -downhillAcceleration; 
+            velocity += velocity.normalized * dot * slopeFactor; 
+
             RB.velocity = velocity + playerPhysics.verticalVelocity;
         }
+
 
         // Deceleration function
         void Decelerate(float speed)
