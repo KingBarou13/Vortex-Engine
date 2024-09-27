@@ -395,7 +395,9 @@
 "Assets/Player/Controls+Physics/RailScript.cs"
 "Assets/Player/Controls+Physics/ReticleRotate.cs"
 "Assets/Player/Controls+Physics/RotationHandler.cs"
+"Assets/Stage Assets/Dash Panel/DashPanel.cs"
 "Assets/Stage Assets/MovingPlatform.cs"
+"Assets/Stage Assets/Spring/Spring.cs"
 "Assets/UI/Speedometer.cs"
 -langversion:9.0
 /deterministic

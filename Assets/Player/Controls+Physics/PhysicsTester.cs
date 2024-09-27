@@ -1,10 +1,14 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PhysicsTester : MonoBehaviour
 {
     private float upDownAngle;
     public Text displayText; // Reference to the UI Text component
+    public float downRange = 5f; // Range for the downward raycast
 
     void Start()
     {

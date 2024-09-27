@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Target
   - Rail
+  - Dash Panel
+  - Trigger Collider
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: mat_spin_ball5
     second: {fileID: 2100000, guid: 5d5e071956e435349875614445b2dd5b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: eff_m_sonic_spin5
+    second: {fileID: 2800000, guid: 1e7de28e5e6f6d1438fc51f532754c52, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

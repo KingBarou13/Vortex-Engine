@@ -8,7 +8,16 @@ public class MoveAction : PlayerAction
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
-        move = callbackContext.ReadValue<Vector2>();
+        // If control lock is active, ignore left/right input
+        if (!controlLockActive)
+        {
+            move = callbackContext.ReadValue<Vector2>();
+        }
+        else
+        {
+            // Prevent left and right input during the control lock period
+            move.x = 0; // Only vertical movement allowed
+        }
     }
 
     // On Enable
@@ -34,6 +43,10 @@ public class MoveAction : PlayerAction
     [SerializeField] float uphillDeceleration;
     [SerializeField] float downhillAcceleration;
 
+    [SerializeField] bool controlLockActive;
+    [SerializeField] float controlLockTimer;
+
+
     [SerializeField] float brakeSpeed;
     [SerializeField, Range(0, 1)] float softBrakeThreshold;
     [SerializeField] float brakeThreshold;
@@ -52,6 +65,19 @@ public class MoveAction : PlayerAction
     bool braking;
     float brakeTimer;
 
+    private void FixedUpdate()
+    {
+        if(controlLockActive)
+        {
+            controlLockTimer -= Time.deltaTime;
+            if(controlLockTimer <= 0)
+            {
+                controlLockActive = false;
+            }
+
+        }
+    }
+
     public bool IsBraking()
     {
         return braking;
@@ -60,6 +86,13 @@ public class MoveAction : PlayerAction
     public Vector3 GetMoveVector()
     {
         return GetMoveVector(cameraTransform, groundInfo.normal, move);
+    }
+
+    //Control Lock Trigger
+    public void TriggerControlLock(float duration)
+    {
+        controlLockActive = true;
+        controlLockTimer = duration;
     }
 
     // Move function
