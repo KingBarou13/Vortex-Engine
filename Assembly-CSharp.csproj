@@ -66,16 +66,17 @@
   <ItemGroup>
     <Compile Include="Assets\UI\Speedometer.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
-    <Compile Include="Assets\Stage Assets\MovingPlatform.cs" />
+    <Compile Include="Assets\Stage Assets\Groun\MovingPlatform.cs" />
     <Compile Include="Assets\Stage Assets\Dash Panel\DashPanel.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\RisingAndFalling.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Actions\SplineMovement.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\Launcher.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\JumpAction.cs" />
-    <Compile Include="Assets\Stage Assets\Spring\Spring.cs" />
     <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
-    <Compile Include="Assets\Player\Controls+Physics\Actions\GrindAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Actions\SpinFX.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\PlayerAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />

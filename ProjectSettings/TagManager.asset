@@ -8,6 +8,7 @@ TagManager:
   - Rail
   - Dash Panel
   - Trigger Collider
+  - Environment
   layers:
   - Default
   - TransparentFX
