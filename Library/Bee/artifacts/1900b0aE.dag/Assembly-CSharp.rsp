@@ -389,6 +389,7 @@
 "Assets/Player/Controls+Physics/Actions/RisingAndFalling.cs"
 "Assets/Player/Controls+Physics/Actions/SpinFX.cs"
 "Assets/Player/Controls+Physics/Actions/SplineMovement.cs"
+"Assets/Player/Controls+Physics/CameraOrbit.cs"
 "Assets/Player/Controls+Physics/HomingReticle.cs"
 "Assets/Player/Controls+Physics/NearestTargetFinder.cs"
 "Assets/Player/Controls+Physics/PhysicsTester.cs"
@@ -396,9 +397,9 @@
 "Assets/Player/Controls+Physics/RailScript.cs"
 "Assets/Player/Controls+Physics/ReticleRotate.cs"
 "Assets/Player/Controls+Physics/RotationHandler.cs"
+"Assets/Player/Controls+Physics/Stage Interactions/DashPanel.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/Launcher.cs"
-"Assets/Stage Assets/Dash Panel/DashPanel.cs"
-"Assets/Stage Assets/Groun/MovingPlatform.cs"
+"Assets/Stage Assets/Ground/MovingPlatform.cs"
 "Assets/UI/Speedometer.cs"
 -langversion:9.0
 /deterministic

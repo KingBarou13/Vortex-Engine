@@ -66,12 +66,13 @@
   <ItemGroup>
     <Compile Include="Assets\UI\Speedometer.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
-    <Compile Include="Assets\Stage Assets\Groun\MovingPlatform.cs" />
-    <Compile Include="Assets\Stage Assets\Dash Panel\DashPanel.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\CameraOrbit.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\DashPanel.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\RisingAndFalling.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\SplineMovement.cs" />
+    <Compile Include="Assets\Stage Assets\Ground\MovingPlatform.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\Launcher.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
