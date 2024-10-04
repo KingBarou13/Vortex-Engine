@@ -10,7 +10,7 @@ public class JumpAction : PlayerAction
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject spinBall;
     [SerializeField] private GameObject spinFX;
-    int currentJumps;
+    public int currentJumps;
 
     void Start()
     {

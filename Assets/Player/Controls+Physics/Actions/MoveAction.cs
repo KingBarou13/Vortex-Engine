@@ -194,16 +194,24 @@ public class MoveAction : PlayerAction
     }
 
     // Get Move Vector function
-    Vector3 GetMoveVector(Transform relativeTo, Vector3 upNormal, Vector2 move)
+    Vector3 GetMoveVector(Transform relativeTo, Vector3 groundNormal, Vector2 moveInput)
     {
-        Vector3 rightNormal = Vector3.Cross(upNormal, relativeTo.forward);
-        Vector3 forwardNormal = Vector3.Cross(relativeTo.right, upNormal);
+        
+        Vector3 cameraRight = relativeTo.right;
+        Vector3 cameraForward = Vector3.Cross(cameraRight, Vector3.up); 
 
-        Vector3.OrthoNormalize(ref upNormal, ref forwardNormal, ref rightNormal);
+        
+        Vector3 inputDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
-        Debug.DrawRay(RB.transform.position, rightNormal * 10, Color.red);
-        Debug.DrawRay(RB.transform.position, forwardNormal * 10, Color.green);
+        
+        Vector3 cameraRelativeMove = inputDirection.x * cameraRight + inputDirection.z * cameraForward;
 
-        return (rightNormal * move.x) + (forwardNormal * move.y);
+        
+        Quaternion groundRotation = Quaternion.FromToRotation(Vector3.up, groundNormal);
+        Vector3 finalMoveVector = groundRotation * cameraRelativeMove;
+
+        Debug.DrawRay(RB.transform.position, finalMoveVector * 10, Color.blue);
+
+        return finalMoveVector;
     }
 }

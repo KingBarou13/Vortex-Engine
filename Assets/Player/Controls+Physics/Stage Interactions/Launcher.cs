@@ -1,66 +1,32 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Launcher : MonoBehaviour
 {
-    [SerializeField] private float upRange = 5;  // Max height of the trajectory
-    [SerializeField] private int resolution = 20;  // Number of points in the curve
-    [SerializeField] private bool useParabolicCurve = true;  // Toggle between curve and straight line
-    [SerializeField] private LayerMask collisionMask; // Layer mask for objects that can be hit
-    [SerializeField] private Transform endPoint; // Draggable end point in the scene
+    [SerializeField] private float launchForce;
 
-    void OnDrawGizmos()
+    private void OnTriggerEnter(Collider other)
     {
-        if (useParabolicCurve)
+        if (other.CompareTag("Player"))
         {
-            DrawParabolicCurve();
-        }
-        else
-        {
-            DrawStraightLine();
-        }
-    }
+            var playerPhysics = other.GetComponent<PlayerPhysics>();
 
-    void DrawParabolicCurve()
-    {
-        Vector3 startPos = transform.position;
-        Vector3 previousPos = startPos;
-
-        for (int i = 1; i <= resolution; i++)
-        {
-            float t = (float)i / resolution;
-            Vector3 point = CalculateParabolaPoint(startPos, t, endPoint.position);
-
-            if (Physics.Raycast(previousPos, point - previousPos, out RaycastHit hit, Vector3.Distance(previousPos, point), collisionMask))
+            if (playerPhysics != null)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(previousPos, hit.point);
-                break;
+                LaunchPlayer(playerPhysics);
             }
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(previousPos, point);
-            previousPos = point;
         }
     }
 
-
-    void DrawStraightLine()
+    private void LaunchPlayer(PlayerPhysics playerPhysics)
     {
-        Vector3 startPos = transform.position;
-        Vector3 endPos = endPoint.position;
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(startPos, endPos);
-    }
+        // Apply vertical launch velocity + current horizontal velocity
+        playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * launchForce) + playerPhysics.horizontalVelocity;
+        Debug.Log("Bounce!");
 
-    Vector3 CalculateParabolaPoint(Vector3 startPos, float t, Vector3 endPos)
-    {
-        Vector3 horizontalPoint = Vector3.Lerp(startPos, endPos, t);
-
-        float parabolaHeight = 4 * upRange * t * (1 - t);
-
-        float verticalPoint = Mathf.Lerp(startPos.y, endPos.y, t) + parabolaHeight;
-
-        return new Vector3(horizontalPoint.x, verticalPoint, horizontalPoint.z);
+        var jumpAction = playerPhysics.GetComponent<JumpAction>();
+        if (jumpAction != null)
+        {
+            jumpAction.currentJumps = 0; // Reset jumps after launch
+        }
     }
 }

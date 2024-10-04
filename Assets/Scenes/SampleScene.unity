@@ -1167,6 +1167,7 @@ MonoBehaviour:
   animator: {fileID: 1369306369}
   spinBall: {fileID: 540168972}
   spinFX: {fileID: 1260562209}
+  currentJumps: 0
 --- !u!4 &420913760
 Transform:
   m_ObjectHideFlags: 0
@@ -1416,7 +1417,7 @@ MonoBehaviour:
   minTurnSpeed: 3
   maxTurnSpeed: 1
   turnDeceleration: 0.5
-  uphillDeceleration: 0.9
+  uphillDeceleration: 0
   downhillAcceleration: 1.1
   controlLockActive: 0
   controlLockTimer: 1
@@ -8212,7 +8213,7 @@ GameObject:
   - component: {fileID: 1172153689}
   m_Layer: 0
   m_Name: Rigidbody
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8667,13 +8668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fcb9ae91b3ed54b95b85f9d1944247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upRange: 11
-  resolution: 100
-  useParabolicCurve: 1
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 1
-  endPoint: {fileID: 1342928447}
+  launchForce: 40
 --- !u!4 &1345752060 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7518883223126218161, guid: b8a3cfebe6e23784e9a00350be5180dc, type: 3}
@@ -9156,6 +9151,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6edab4f2-3dab-4627-ad6e-cc603a37a5ad
     m_ActionName: Default/Homing Attack[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c28a656-39ba-48f8-adb7-fa84ff139b68
+    m_ActionName: Default/Camera Movement[/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default
