@@ -3,40 +3,34 @@ using UnityEngine.InputSystem;
 
 public class MoveAction : PlayerAction
 {
-    // On Move
     Vector2 move;
+    public CameraManager cameraManager; // Reference to the Camera Manager
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
-        // If control lock is active, ignore left/right input
         if (!controlLockActive)
         {
             move = callbackContext.ReadValue<Vector2>();
         }
         else
         {
-            // Prevent left and right input during the control lock period
-            move.x = 0; // Only vertical movement allowed
+            move.x = 0;
         }
     }
 
-    // On Enable
     void OnEnable()
     {
         playerPhysics.onPlayerPhysicsUpdate += Move;
     }
 
-    // On Disable
     void OnDisable()
     {
         playerPhysics.onPlayerPhysicsUpdate -= Move;
     }
 
-    // Movement Settings
-    [SerializeField] Transform cameraTransform;
     [SerializeField] float acceleration;
     [SerializeField] float deceleration;
-    [SerializeField] float maxSpeed; 
+    [SerializeField] float maxSpeed;
     [SerializeField] float minTurnSpeed;
     [SerializeField] float maxTurnSpeed;
     [SerializeField, Range(0, 1)] float turnDeceleration;
@@ -46,35 +40,30 @@ public class MoveAction : PlayerAction
     [SerializeField] bool controlLockActive;
     [SerializeField] float controlLockTimer;
 
-
     [SerializeField] float brakeSpeed;
     [SerializeField, Range(0, 1)] float softBrakeThreshold;
     [SerializeField] float brakeThreshold;
     [SerializeField] float brakeTime;
 
     [SerializeField] private Animator animator;
-
-    [SerializeField] private ParticleSystem speedLines; // Reference to the speed lines particle system
-    [SerializeField] private float speedLineThreshold;  // Speed at which speed lines appear
-
-    [SerializeField] private Camera mainCamera;         // Reference to the main camera
-    [SerializeField] private float targetFOV = 90f;     // Target FOV when speed is high
-    [SerializeField] private float baseFOV = 60f;       // Base FOV when speed is low
-    [SerializeField] private float fovChangeSpeed = 2f; // Speed of FOV transition
+    [SerializeField] private ParticleSystem speedLines;
+    [SerializeField] private float speedLineThreshold;
+    [SerializeField] private float targetFOV = 90f;
+    [SerializeField] private float baseFOV = 60f;
+    [SerializeField] private float fovChangeSpeed = 2f;
 
     bool braking;
     float brakeTimer;
 
     private void FixedUpdate()
     {
-        if(controlLockActive)
+        if (controlLockActive)
         {
             controlLockTimer -= Time.deltaTime;
-            if(controlLockTimer <= 0)
+            if (controlLockTimer <= 0)
             {
                 controlLockActive = false;
             }
-
         }
     }
 
@@ -85,46 +74,41 @@ public class MoveAction : PlayerAction
 
     public Vector3 GetMoveVector()
     {
-        return GetMoveVector(cameraTransform, groundInfo.normal, move);
+        return GetMoveVector(cameraManager.GetActiveCamera().transform, groundInfo.normal, move);
     }
 
-    //Control Lock Trigger
     public void TriggerControlLock(float duration)
     {
         controlLockActive = true;
         controlLockTimer = duration;
     }
 
-    // Move function
     void Move()
     {
-        Vector3 moveVector = GetMoveVector(cameraTransform, groundInfo.normal, move);
-
+        Vector3 moveVector = GetMoveVector();
         float currentSpeed = playerPhysics.speed;
 
         animator.SetFloat("Speed", currentSpeed);
         animator.speed = Mathf.Clamp(currentSpeed / maxSpeed, 0.5f, 2f);
 
-        // Control the visibility of the speed lines based on the custom speed threshold
         if (currentSpeed >= speedLineThreshold && !speedLines.isPlaying)
         {
-            speedLines.Play();  // Start speed lines when the speed exceeds the threshold
+            speedLines.Play();
         }
         else if (currentSpeed < speedLineThreshold && speedLines.isPlaying)
         {
-            speedLines.Stop();  // Stop speed lines when speed falls below the threshold
+            speedLines.Stop();
         }
 
-        // Adjust the camera's FOV when speed exceeds the threshold
+        // Adjust the FOV based on speed
+        Camera activeCamera = cameraManager.GetActiveCamera();
         if (currentSpeed >= speedLineThreshold)
         {
-            // Smoothly transition to the target FOV
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, fovChangeSpeed * Time.deltaTime);
+            activeCamera.fieldOfView = Mathf.Lerp(activeCamera.fieldOfView, targetFOV, fovChangeSpeed * Time.deltaTime);
         }
         else
         {
-            // Smoothly return to the base FOV
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, baseFOV, fovChangeSpeed * Time.deltaTime);
+            activeCamera.fieldOfView = Mathf.Lerp(activeCamera.fieldOfView, baseFOV, fovChangeSpeed * Time.deltaTime);
         }
 
         bool wasBraking = braking;
@@ -149,7 +133,7 @@ public class MoveAction : PlayerAction
         }
         else
         {
-            animator.SetBool("IsBraking", false); 
+            animator.SetBool("IsBraking", false);
             if (move.magnitude > 0)
             {
                 if (Vector3.Dot(moveVector.normalized, playerPhysics.horizontalVelocity.normalized) >= (groundInfo.ground ? -softBrakeThreshold : 0))
@@ -167,7 +151,6 @@ public class MoveAction : PlayerAction
             }
         }
 
-        // Acceleration function
         void Accelerate(float speed)
         {
             float maxRadDelta = Mathf.Lerp(minTurnSpeed, maxTurnSpeed, playerPhysics.speed / maxSpeed) * Mathf.PI * Time.deltaTime;
@@ -184,8 +167,6 @@ public class MoveAction : PlayerAction
             RB.velocity = velocity + playerPhysics.verticalVelocity;
         }
 
-
-        // Deceleration function
         void Decelerate(float speed)
         {
             RB.velocity = Vector3.MoveTowards(playerPhysics.horizontalVelocity, Vector3.zero, speed * Time.deltaTime)
@@ -193,20 +174,12 @@ public class MoveAction : PlayerAction
         }
     }
 
-    // Get Move Vector function
     Vector3 GetMoveVector(Transform relativeTo, Vector3 groundNormal, Vector2 moveInput)
     {
-        
         Vector3 cameraRight = relativeTo.right;
-        Vector3 cameraForward = Vector3.Cross(cameraRight, Vector3.up); 
-
-        
+        Vector3 cameraForward = Vector3.Cross(cameraRight, Vector3.up);
         Vector3 inputDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
-
-        
         Vector3 cameraRelativeMove = inputDirection.x * cameraRight + inputDirection.z * cameraForward;
-
-        
         Quaternion groundRotation = Quaternion.FromToRotation(Vector3.up, groundNormal);
         Vector3 finalMoveVector = groundRotation * cameraRelativeMove;
 
