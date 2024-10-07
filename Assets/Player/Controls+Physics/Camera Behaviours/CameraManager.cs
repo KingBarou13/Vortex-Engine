@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public Camera[] cameras;
-    private Camera activeCamera;
+    public Camera activeCamera;
 
     void Start()
     {

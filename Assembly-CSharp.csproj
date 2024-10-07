@@ -76,6 +76,7 @@
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraManager.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\Launcher.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\JumpAction.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraSymbol.cs" />
     <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\SpinFX.cs" />

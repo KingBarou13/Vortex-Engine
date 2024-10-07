@@ -392,6 +392,7 @@
 "Assets/Player/Controls+Physics/Camera Behaviours/CameraManager.cs"
 "Assets/Player/Controls+Physics/Camera Behaviours/CameraOrbit.cs"
 "Assets/Player/Controls+Physics/Camera Behaviours/CameraSwitchTrigger.cs"
+"Assets/Player/Controls+Physics/Camera Behaviours/CameraSymbol.cs"
 "Assets/Player/Controls+Physics/HomingReticle.cs"
 "Assets/Player/Controls+Physics/NearestTargetFinder.cs"
 "Assets/Player/Controls+Physics/PhysicsTester.cs"
