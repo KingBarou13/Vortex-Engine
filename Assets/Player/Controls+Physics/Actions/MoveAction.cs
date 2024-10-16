@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class MoveAction : PlayerAction
 {
     Vector2 move;
-    public CameraManager cameraManager; // Reference to the Camera Manager
+    public CameraManager cameraManager;
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
-        if (!controlLockActive)
+        if (!controlLockActive || !grindAction.onRail)
         {
             move = callbackContext.ReadValue<Vector2>();
         }
@@ -54,6 +54,8 @@ public class MoveAction : PlayerAction
 
     bool braking;
     float brakeTimer;
+
+    [SerializeField] GrindAction grindAction;
 
     private void FixedUpdate()
     {

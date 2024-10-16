@@ -69,15 +69,15 @@
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraSwitchTrigger.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\DashPanel.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
-    <Compile Include="Assets\Player\Controls+Physics\RailScript.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Spline Movement\RailScript.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\RisingAndFalling.cs" />
-    <Compile Include="Assets\Player\Controls+Physics\Actions\SplineMovement.cs" />
     <Compile Include="Assets\Stage Assets\Ground\MovingPlatform.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraManager.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\Launcher.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\JumpAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraSymbol.cs" />
     <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Actions\GrindAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\SpinFX.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
