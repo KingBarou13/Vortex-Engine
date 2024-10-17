@@ -8,7 +8,7 @@ public class MoveAction : PlayerAction
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
-        if (!controlLockActive || !grindAction.onRail)
+        if (!controlLockActive)
         {
             move = callbackContext.ReadValue<Vector2>();
         }
@@ -54,8 +54,6 @@ public class MoveAction : PlayerAction
 
     bool braking;
     float brakeTimer;
-
-    [SerializeField] GrindAction grindAction;
 
     private void FixedUpdate()
     {

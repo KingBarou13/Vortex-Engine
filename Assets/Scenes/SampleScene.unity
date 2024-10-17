@@ -949,56 +949,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 24105836}
   m_SourcePrefab: {fileID: 100100000, guid: 30ff1dd6d6e3d7743a8b7be0f847f503, type: 3}
---- !u!1 &362909185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 362909186}
-  - component: {fileID: 362909187}
-  m_Layer: 0
-  m_Name: Grind
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &362909186
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362909185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 429248686}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &362909187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362909185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a504d468b8807e749b6eb5c860240f05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPhysics: {fileID: 1172153683}
-  onRail: 0
-  grindSpeed: 5
-  heightOffset: 0
-  lerpSpeed: 10
-  currentRailScript: {fileID: 1685158431}
 --- !u!1 &366435608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1248,6 @@ Transform:
   m_Children:
   - {fileID: 420913760}
   - {fileID: 613945220}
-  - {fileID: 362909186}
   m_Father: {fileID: 1561457231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &484730532
@@ -1516,7 +1465,6 @@ MonoBehaviour:
   targetFOV: 90
   baseFOV: 60
   fovChangeSpeed: 2
-  grindAction: {fileID: 0}
 --- !u!1 &626724605
 GameObject:
   m_ObjectHideFlags: 0
@@ -9689,7 +9637,6 @@ GameObject:
   - component: {fileID: 1685158426}
   - component: {fileID: 1685158425}
   - component: {fileID: 1685158430}
-  - component: {fileID: 1685158431}
   m_Layer: 3
   m_Name: Spline
   m_TagString: Rail
@@ -9985,21 +9932,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b594eda7ec4438b4cb77d89ed618e19c, type: 2}
---- !u!114 &1685158431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1685158424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d737bd29c88b4d045a645c7419884ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalDirection: 0
-  railSpline: {fileID: 0}
-  totalSplineLength: 0
 --- !u!1 &1767070817
 GameObject:
   m_ObjectHideFlags: 0

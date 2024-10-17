@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 8597
+  controlID: 75
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_SerializedViewValues:
   - C:\Users\musun\Code\Unity Projects\Vortex Engine\Library\PlayModeViewStates\c0bd314b1ee90e74796fc8584f2ba98b
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 1
+  m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 904.75, y: 358.5}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 1
+  m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 8598
+  controlID: 76
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 8599
+  controlID: 77
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -240,10 +240,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4eebffff
-      m_LastClickedID: -5298
-      m_ExpandedIDs: 00fbffff76750000b2760000
+      scrollPos: {x: 0, y: 385.2}
+      m_SelectedIDs: d0760000
+      m_LastClickedID: 30416
+      m_ExpandedIDs: 0cfbffff7c750000b8760000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 8676
+  controlID: 154
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -995,9 +995,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a7d0000
-    m_LastClickedID: 32090
-    m_ExpandedIDs: 000000004c7a0000487d0000587d000000ca9a3b
+    m_SelectedIDs: ea880000
+    m_LastClickedID: 35050
+    m_ExpandedIDs: 00000000da880000de880000ec88000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1025,7 +1025,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 58e5ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004c7a000000ca9a3b
+    m_ExpandedIDs: 00000000da880000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1050,9 +1050,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4eebffff
-    m_LastClickedInstanceID: -5298
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: d0760000
+    m_LastClickedInstanceID: 30416
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000e4800000f221ffff00000000f475000096760000c48b0000d2a900004a8800002a770000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1169,8 +1169,8 @@ MonoBehaviour:
     y: 0
     width: 632
     height: 394
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1286,7 +1286,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 6ca90000
     m_LastClickedID: 43372
-    m_ExpandedIDs: 000000004c7a000000ca9a3b
+    m_ExpandedIDs: 00000000da880000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1314,7 +1314,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004c7a000000ca9a3b
+    m_ExpandedIDs: 00000000da880000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
