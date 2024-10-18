@@ -78,6 +78,7 @@
     <Compile Include="Assets\Player\Controls+Physics\ReticleRotate.cs" />
     <Compile Include="Assets\Player\Controls+Physics\HomingReticle.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\SpinFX.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Spline Movement\RailGrindTrigger.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraOrbit.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\PlayerAction.cs" />

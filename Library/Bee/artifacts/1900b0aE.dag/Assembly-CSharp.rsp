@@ -398,6 +398,7 @@
 "Assets/Player/Controls+Physics/PlayerPhysics.cs"
 "Assets/Player/Controls+Physics/ReticleRotate.cs"
 "Assets/Player/Controls+Physics/RotationHandler.cs"
+"Assets/Player/Controls+Physics/Spline Movement/RailGrindTrigger.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/DashPanel.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/Launcher.cs"
 "Assets/Stage Assets/Ground/MovingPlatform.cs"
