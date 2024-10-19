@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 public class RotationHandler : MonoBehaviour
 {
@@ -13,27 +14,45 @@ public class RotationHandler : MonoBehaviour
 
     void Update()
     {
-        if (moveAction.IsBraking() || grindAction.isGrinding)
+        if (moveAction.IsBraking())
         {
             return;
         }
 
-        
-
-        Vector3 moveVector = moveAction.GetMoveVector();
-
-        if (moveVector.sqrMagnitude > 0)
+        if (grindAction.isGrinding)
         {
-            RotatePlayer(moveVector);
+            RotateAccordingToSpline();
         }
+        else
+        {
+            Vector3 moveVector = moveAction.GetMoveVector();
 
-        CheckForwardDirection();
-        CheckUpDirection();
+            if (moveVector.sqrMagnitude > 0)
+            {
+                RotatePlayer(moveVector);
+            }
+
+            CheckForwardDirection();
+            CheckUpDirection();
+        }
     }
 
     void RotatePlayer(Vector3 moveDirection)
     {
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection, referenceObject.up);
+        player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    void RotateAccordingToSpline()
+    {
+        Vector3 tangent = math.normalize(grindAction.currentSpline.EvaluateTangent(grindAction.splineProgress));
+
+        if (grindAction.isReversing)
+        {
+            tangent = -tangent; 
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(tangent);
 
         player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }

@@ -1201,6 +1201,7 @@ MonoBehaviour:
   animator: {fileID: 1369306369}
   spinBall: {fileID: 540168972}
   spinFX: {fileID: 1260562209}
+  railGrindTrigger: {fileID: 1172153690}
   currentJumps: 0
 --- !u!4 &420913760
 Transform:
@@ -8606,10 +8607,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grindSpeed: 0
   minGrindSpeed: 0.2
+  currentSpline: {fileID: 0}
   isGrinding: 0
+  splineProgress: 0
+  isReversing: 0
   animator: {fileID: 1369306369}
   playerPhysics: {fileID: 1172153683}
   moveAction: {fileID: 613945221}
+  spinBall: {fileID: 540168972}
+  spinFX: {fileID: 1260562209}
 --- !u!1001 &1203046414
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,19 +1,26 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
+using System.Collections;
 
 public class RailGrindTrigger : MonoBehaviour
 {
     public float grindSpeed = 5f;
     public float minGrindSpeed = 0.2f;
-    private SplineContainer currentSpline;
+    public SplineContainer currentSpline;
     public bool isGrinding = false;
-    private float splineProgress = 0f;
-    private bool isReversing = false;
+    public float splineProgress = 0f;
+    public bool isReversing = false;
     [SerializeField] private Animator animator;
 
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] MoveAction moveAction;
+
+    [SerializeField] private GameObject spinBall;
+    [SerializeField] private GameObject spinFX;
+
+    private static readonly int GrindingHash = Animator.StringToHash("IsGrinding");
+    private static readonly int LandOnRailHash = Animator.StringToHash("LandOnRail");
 
     private void Update()
     {
@@ -51,6 +58,8 @@ public class RailGrindTrigger : MonoBehaviour
         if (spline != null && other is MeshCollider)
         {
             grindSpeed = Mathf.Max(playerPhysics.horizontalVelocity.magnitude / 100, minGrindSpeed);
+
+            grindSpeed = Mathf.Min(grindSpeed, 0.5f);
             StartGrind(spline);
         }
     }
@@ -66,6 +75,20 @@ public class RailGrindTrigger : MonoBehaviour
 
         isReversing = dotProduct < 0;
         isGrinding = true;
+
+        animator.SetTrigger(LandOnRailHash);
+
+        spinBall.SetActive(false);
+        spinFX.SetActive(false);
+
+        StartCoroutine(TransitionToGrindAnimation());
+    }
+
+    private IEnumerator TransitionToGrindAnimation()
+    {
+        yield return new WaitForSeconds(0.35f);
+
+        animator.SetBool(GrindingHash, true);
     }
 
     private float FindClosestPointOnSpline(SplineContainer spline, Vector3 position)
@@ -93,5 +116,7 @@ public class RailGrindTrigger : MonoBehaviour
         isGrinding = false;
         currentSpline = null;
         moveAction.enabled = true;
+
+        animator.SetBool(GrindingHash, false);
     }
 }

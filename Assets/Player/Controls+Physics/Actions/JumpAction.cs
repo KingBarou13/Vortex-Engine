@@ -10,6 +10,7 @@ public class JumpAction : PlayerAction
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject spinBall;
     [SerializeField] private GameObject spinFX;
+    [SerializeField] private RailGrindTrigger railGrindTrigger;
     public int currentJumps;
 
     void Start()
@@ -19,7 +20,6 @@ public class JumpAction : PlayerAction
             risingAndFalling = GetComponent<RisingAndFalling>();
         }
 
-        // Ensure spinBall and spinFX are hidden at the start
         spinBall.SetActive(false);
         spinFX.SetActive(false);
     }
@@ -46,34 +46,24 @@ public class JumpAction : PlayerAction
     {
         currentJumps = jumps;
         animator.SetBool("IsJumping", false);
-
-        // Hide spinBall and spinFX when grounded
         spinBall.SetActive(false);
         spinFX.SetActive(false);
-
         risingAndFalling.OnJumpEnded();
     }
 
     void Jump()
     {
-        if (currentJumps <= 0) return;
+        if (currentJumps <= 0 || (railGrindTrigger != null && railGrindTrigger.isGrinding))
+        {
+            return;
+        }
 
         currentJumps--;
-
-        // Determine jump force based on whether the player is grounded or in the air
         float appliedJumpForce = playerPhysics.groundInfo.ground ? jumpForce : airJumpForce;
-
-        // Apply vertical jump velocity, adding current horizontal velocity
         playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
-
-        // Update animator to indicate jumping
         animator.SetBool("IsJumping", true);
-
-        // Show spinBall and spinFX when jumping
         spinBall.SetActive(true);
         spinFX.SetActive(true);
-
-        // Notify Rising and Falling script that a jump has been initiated
         risingAndFalling.OnJumpInitiated();
     }
 }
