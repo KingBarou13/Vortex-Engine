@@ -12,21 +12,30 @@ public class RailGrindTrigger : MonoBehaviour
     public float splineProgress = 0f;
     public bool isReversing = false;
     [SerializeField] private Animator animator;
-
     [SerializeField] private PlayerPhysics playerPhysics;
+    [SerializeField] private JumpAction jumpAction;
     [SerializeField] MoveAction moveAction;
-
     [SerializeField] private GameObject spinBall;
     [SerializeField] private GameObject spinFX;
 
     private static readonly int GrindingHash = Animator.StringToHash("IsGrinding");
     private static readonly int LandOnRailHash = Animator.StringToHash("LandOnRail");
 
+    private Vector3 previousPosition;
+    private Vector3 grindVelocity;
+
     private void Update()
     {
         if (isGrinding)
         {
             moveAction.enabled = false;
+
+            if (jumpAction != null && jumpAction.currentJumps > 0 && Input.GetButtonDown("Jump"))
+            {
+                jumpAction.Jump();
+                ExitGrind();
+                return;
+            }
 
             if (isReversing)
             {
@@ -45,6 +54,9 @@ public class RailGrindTrigger : MonoBehaviour
             Vector3 tangent = math.normalize(currentSpline.EvaluateTangent(splineProgress));
             playerPhysics.RB.MoveRotation(Quaternion.LookRotation(tangent));
 
+            grindVelocity = (railPosition - previousPosition) / Time.deltaTime;
+            previousPosition = railPosition;
+
             if (splineProgress <= 0f || splineProgress >= 1f)
             {
                 ExitGrind();
@@ -58,7 +70,6 @@ public class RailGrindTrigger : MonoBehaviour
         if (spline != null && other is MeshCollider)
         {
             grindSpeed = Mathf.Max(playerPhysics.horizontalVelocity.magnitude / 100, minGrindSpeed);
-
             grindSpeed = Mathf.Min(grindSpeed, 0.5f);
             StartGrind(spline);
         }
@@ -76,18 +87,20 @@ public class RailGrindTrigger : MonoBehaviour
         isReversing = dotProduct < 0;
         isGrinding = true;
 
+        jumpAction.currentJumps = jumpAction.jumps;
+
         animator.SetTrigger(LandOnRailHash);
 
         spinBall.SetActive(false);
         spinFX.SetActive(false);
 
+        previousPosition = currentSpline.EvaluatePosition(splineProgress);
         StartCoroutine(TransitionToGrindAnimation());
     }
 
     private IEnumerator TransitionToGrindAnimation()
     {
         yield return new WaitForSeconds(0.35f);
-
         animator.SetBool(GrindingHash, true);
     }
 
@@ -111,10 +124,12 @@ public class RailGrindTrigger : MonoBehaviour
         return closestProgress;
     }
 
-    private void ExitGrind()
+    public void ExitGrind()
     {
         isGrinding = false;
         currentSpline = null;
+
+        playerPhysics.RB.velocity = grindVelocity + playerPhysics.verticalVelocity;
         moveAction.enabled = true;
 
         animator.SetBool(GrindingHash, false);

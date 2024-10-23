@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class JumpAction : PlayerAction
 {
     [SerializeField] private RisingAndFalling risingAndFalling;
-    [SerializeField] int jumps;
+    public int jumps;
     [SerializeField] float jumpForce;
     [SerializeField] float airJumpForce;
     [SerializeField] private Animator animator;
@@ -42,6 +42,28 @@ public class JumpAction : PlayerAction
         playerPhysics.onGroundEnter -= OnGroundEnter;
     }
 
+    public void Jump()
+    {
+        if (currentJumps <= 0) return;
+
+        currentJumps--;
+
+        bool isGroundedOrGrinding = playerPhysics.groundInfo.ground || railGrindTrigger.isGrinding;
+        float appliedJumpForce = isGroundedOrGrinding ? jumpForce : airJumpForce;
+
+        playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
+
+        animator.SetBool("IsJumping", true);
+        spinBall.SetActive(true);
+        spinFX.SetActive(true);
+        risingAndFalling.OnJumpInitiated();
+
+        if (railGrindTrigger.isGrinding)
+        {
+            railGrindTrigger.ExitGrind();
+        }
+    }
+
     void OnGroundEnter()
     {
         currentJumps = jumps;
@@ -51,19 +73,5 @@ public class JumpAction : PlayerAction
         risingAndFalling.OnJumpEnded();
     }
 
-    void Jump()
-    {
-        if (currentJumps <= 0 || (railGrindTrigger != null && railGrindTrigger.isGrinding))
-        {
-            return;
-        }
 
-        currentJumps--;
-        float appliedJumpForce = playerPhysics.groundInfo.ground ? jumpForce : airJumpForce;
-        playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
-        animator.SetBool("IsJumping", true);
-        spinBall.SetActive(true);
-        spinFX.SetActive(true);
-        risingAndFalling.OnJumpInitiated();
-    }
 }

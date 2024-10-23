@@ -4,67 +4,95 @@ public class RisingAndFalling : MonoBehaviour
 {
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] private Animator animator;
-    [SerializeField] private float risingThreshold = 2f; // Minimum upward speed to trigger rising animation
-    [SerializeField] private float fallingThreshold = -2f; // Maximum downward speed to trigger falling animation
+    [SerializeField] private float risingThreshold = 2f; 
+    [SerializeField] private float fallingThreshold = -2f; 
+    [SerializeField] private float deadZone = 0.1f; 
+    [SerializeField] private float minAirTime = 0.1f; 
 
     private bool wasGrounded = true;
     private bool wasJumping = false;
+    private float airTime = 0f;
 
     private void Update()
     {
         bool isGrounded = playerPhysics.groundInfo.ground;
         float verticalSpeed = playerPhysics.verticalSpeed;
 
-        // Trigger rising or falling animation based on vertical speed when leaving the ground
+        if (!isGrounded)
+        {
+            airTime += Time.deltaTime;
+        }
+        else
+        {
+            airTime = 0f; 
+        }
+
         if (wasGrounded && !isGrounded && !wasJumping)
         {
-            if (verticalSpeed > risingThreshold)
+            if (verticalSpeed > risingThreshold && airTime > minAirTime)
             {
                 animator.SetTrigger("StartRising");
             }
-            else if (verticalSpeed < fallingThreshold)
+            else if (verticalSpeed < fallingThreshold && airTime > minAirTime)
             {
                 animator.SetTrigger("StartFalling");
             }
         }
-        // Update rising/falling state based on vertical speed while in the air
+
         else if (!isGrounded)
         {
-            if (verticalSpeed > risingThreshold)
+            if (verticalSpeed > risingThreshold + deadZone && airTime > minAirTime)
             {
                 animator.SetBool("IsRising", true);
                 animator.SetBool("IsFalling", false);
+                ResetTriggers();
             }
-            else if (verticalSpeed < fallingThreshold)
+            else if (verticalSpeed < fallingThreshold - deadZone && airTime > minAirTime)
             {
                 animator.SetBool("IsRising", false);
                 animator.SetBool("IsFalling", true);
+                ResetTriggers();
             }
-            else
+            else if (airTime <= minAirTime)
             {
                 animator.SetBool("IsRising", false);
                 animator.SetBool("IsFalling", false);
+                ResetTriggers();
             }
         }
-        // Ensure both rising and falling states are false when grounded
-        else
+
+        else if (isGrounded)
         {
-            animator.SetBool("IsRising", false);
-            animator.SetBool("IsFalling", false);
+            ResetAnimationStates();
         }
 
         wasGrounded = isGrounded;
     }
 
-    // Called when a jump is initiated
+    private void ResetAnimationStates()
+    {
+        animator.SetBool("IsRising", false);
+        animator.SetBool("IsFalling", false);
+        ResetTriggers(); 
+        wasJumping = false; 
+    }
+
     public void OnJumpInitiated()
     {
         wasJumping = true;
+        animator.SetBool("IsRising", true); 
+        animator.SetBool("IsFalling", false);
+        ResetTriggers(); 
     }
 
-    // Called when a jump ends (landing or reaching peak height)
     public void OnJumpEnded()
     {
         wasJumping = false;
+    }
+
+    private void ResetTriggers()
+    {
+        animator.ResetTrigger("StartRising");
+        animator.ResetTrigger("StartFalling");
     }
 }
