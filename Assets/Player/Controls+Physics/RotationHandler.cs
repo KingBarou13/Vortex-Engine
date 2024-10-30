@@ -37,7 +37,7 @@ public class RotationHandler : MonoBehaviour
         }
     }
 
-    void RotatePlayer(Vector3 moveDirection)
+    public void RotatePlayer(Vector3 moveDirection)
     {
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection, referenceObject.up);
         player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);

@@ -3,18 +3,20 @@ using UnityEngine.InputSystem;
 
 public class MoveAction : PlayerAction
 {
+    [SerializeField] private HomingAttackAction homingAttackAction;
+    [SerializeField] private CameraManager cameraManager;
+    
     Vector2 move;
-    public CameraManager cameraManager;
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
-        if (!controlLockActive)
+        if (!controlLockActive && (homingAttackAction == null || !homingAttackAction.IsHoming))
         {
             move = callbackContext.ReadValue<Vector2>();
         }
         else
         {
-            move.x = 0;
+            move = Vector2.zero;
         }
     }
 
@@ -85,6 +87,11 @@ public class MoveAction : PlayerAction
 
     void Move()
     {
+        if (homingAttackAction != null && homingAttackAction.IsHoming)
+        {
+            return; // Skip movement if homing
+        }
+
         Vector3 moveVector = GetMoveVector();
         float currentSpeed = playerPhysics.speed;
 
@@ -100,7 +107,6 @@ public class MoveAction : PlayerAction
             speedLines.Stop();
         }
 
-        // Adjust the FOV based on speed
         Camera activeCamera = cameraManager.GetActiveCamera();
         if (currentSpeed >= speedLineThreshold)
         {

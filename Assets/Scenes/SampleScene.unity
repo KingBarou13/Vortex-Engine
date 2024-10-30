@@ -1112,20 +1112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleLength: 1
   distance: 0.75
---- !u!114 &390217714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390217708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78bb778fda0acb54a9ab581967f4dd40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cycleLength: 2
-  distance: 10
 --- !u!4 &411276354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c68c12ce135dae3459ffadbb5f027594, type: 3}
@@ -1345,6 +1331,7 @@ Transform:
   m_Children:
   - {fileID: 420913760}
   - {fileID: 613945220}
+  - {fileID: 1016845864}
   m_Father: {fileID: 1561457231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &484730532
@@ -1473,7 +1460,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.9756691, z: 2.5450287}
+  m_Size: {x: 3, y: 1.9756691, z: 2.5450287}
   m_Center: {x: 0, y: -0.012165427, z: -1.1929659}
 --- !u!1 &540168972 stripped
 GameObject:
@@ -1568,9 +1555,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8753737256342420457, guid: 88c2196f7d66f83428d9fccc83202ad4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 390217713}
-    - targetCorrespondingSourceObject: {fileID: 8753737256342420457, guid: 88c2196f7d66f83428d9fccc83202ad4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 390217714}
   m_SourcePrefab: {fileID: 100100000, guid: 88c2196f7d66f83428d9fccc83202ad4, type: 3}
 --- !u!1 &613945219
 GameObject:
@@ -1617,6 +1601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysics: {fileID: 1172153683}
+  homingAttackAction: {fileID: 1016845865}
   cameraManager: {fileID: 728223432}
   acceleration: 25
   deceleration: 60
@@ -3263,6 +3248,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1016845863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016845864}
+  - component: {fileID: 1016845865}
+  m_Layer: 0
+  m_Name: Homing Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1016845864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016845863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 429248686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1016845865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016845863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2ad1d5b9a4d5042994033d97d37eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPhysics: {fileID: 1172153683}
+  targetFinder: {fileID: 1172153686}
+  homingSpeed: 200
+  rotationSpeed: 200
+  bounceUpwardForce: 30
 --- !u!1 &1023614748
 GameObject:
   m_ObjectHideFlags: 0
@@ -9825,22 +9859,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: ebfa8a953ae6df44cbbbc9cef8af1e7e, type: 3}
-        m_TargetAssemblyTypeName: JumpAction, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+    m_ActionId: 1dc1c581-d352-4e90-9ea9-550af93695f8
+    m_ActionName: Default/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1016845865}
+        m_TargetAssemblyTypeName: HomingAttackAction, Assembly-CSharp
+        m_MethodName: OnHomingAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1dc1c581-d352-4e90-9ea9-550af93695f8
-    m_ActionName: Default/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 6edab4f2-3dab-4627-ad6e-cc603a37a5ad
     m_ActionName: Default/Homing Attack[/Keyboard/space]
   - m_PersistentCalls:
@@ -10019,6 +10053,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97d79b6490b683a4681d7f8a14a246c7, type: 3}
       propertyPath: m_Name
       value: Egg Fighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97d79b6490b683a4681d7f8a14a246c7, type: 3}
+      propertyPath: m_TagString
+      value: Target
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

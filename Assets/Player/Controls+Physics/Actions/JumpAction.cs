@@ -51,7 +51,15 @@ public class JumpAction : PlayerAction
         bool isGroundedOrGrinding = playerPhysics.groundInfo.ground || railGrindTrigger.isGrinding;
         float appliedJumpForce = isGroundedOrGrinding ? jumpForce : airJumpForce;
 
-        playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
+        // Apply force only if Rigidbody is not kinematic
+        if (!playerPhysics.RB.isKinematic)
+        {
+            playerPhysics.RB.velocity = (playerPhysics.groundInfo.normal * appliedJumpForce) + playerPhysics.horizontalVelocity;
+        }
+        else
+        {
+            playerPhysics.RB.AddForce(playerPhysics.groundInfo.normal * appliedJumpForce, ForceMode.VelocityChange);
+        }
 
         animator.SetBool("IsJumping", true);
         spinBall.SetActive(true);
@@ -63,6 +71,7 @@ public class JumpAction : PlayerAction
             railGrindTrigger.ExitGrind();
         }
     }
+
 
     void OnGroundEnter()
     {

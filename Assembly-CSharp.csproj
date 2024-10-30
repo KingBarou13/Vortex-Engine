@@ -67,6 +67,7 @@
     <Compile Include="Assets\UI\Speedometer.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PhysicsTester.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraSwitchTrigger.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Actions\HomingAttackAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\DashPanel.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\RisingAndFalling.cs" />
