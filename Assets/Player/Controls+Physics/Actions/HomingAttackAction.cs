@@ -38,7 +38,7 @@ public class HomingAttackAction : PlayerAction
         playerPhysics.RB.isKinematic = true; // Set to kinematic to avoid physics interactions
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (isHoming)
         {
@@ -54,7 +54,6 @@ public class HomingAttackAction : PlayerAction
             return;
         }
 
-        // Calculate new position and move towards the target
         Vector3 newPosition = Vector3.MoveTowards(playerPhysics.RB.position, target.position, homingSpeed * Time.deltaTime);
         playerPhysics.RB.MovePosition(newPosition);
 
@@ -77,11 +76,16 @@ public class HomingAttackAction : PlayerAction
     {
         playerPhysics.RB.isKinematic = false;
         playerPhysics.enabled = true;
-        Vector3 currentVelocity = playerPhysics.RB.velocity;
-        playerPhysics.RB.velocity = new Vector3(0, currentVelocity.y, 0);
-        RB.AddForce(Vector3.up * bounceUpwardForce, ForceMode.Impulse);
+
+        playerPhysics.RB.velocity = Vector3.zero;
+
+        playerPhysics.RB.AddForce(Vector3.up * bounceUpwardForce, ForceMode.VelocityChange);
+
+        Debug.Log($"Target at position: {target.position} was hit!");
         isHoming = false; 
     }
+
+
 
     void OnCollisionEnter(Collision collision)
     {
