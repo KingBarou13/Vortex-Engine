@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class HomingReticle : MonoBehaviour
 {
-    public NearestTargetFinder targetFinder; 
+    public NearestTargetFinder targetFinder;
+    public PlayerPhysics playerPhysics; 
     public Image reticleImage;
     public Camera mainCamera;
     public Vector3 offset;
@@ -24,7 +25,7 @@ public class HomingReticle : MonoBehaviour
             Vector3 screenPos = mainCamera.WorldToScreenPoint(targetFinder.nearestTarget.position + offset);
 
             // Check if the target is in front of the camera
-            if (screenPos.z > 0)
+            if (screenPos.z > 0 && !playerPhysics.groundInfo.ground)
             {
                 reticleImage.transform.position = screenPos; // Set the reticle position to follow the target
                 reticleImage.enabled = true; // Show the reticle

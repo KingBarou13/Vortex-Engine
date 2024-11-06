@@ -18,7 +18,6 @@ public class RotationHandler : MonoBehaviour
         {
             return;
         }
-
         if (grindAction.isGrinding)
         {
             RotateAccordingToSpline();
@@ -42,6 +41,7 @@ public class RotationHandler : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection, referenceObject.up);
         player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+
 
     void RotateAccordingToSpline()
     {

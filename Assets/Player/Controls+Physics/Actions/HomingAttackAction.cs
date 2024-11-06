@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class HomingAttackAction : PlayerAction
 {
     [SerializeField] private NearestTargetFinder targetFinder;
+    [SerializeField] private JumpAction jumpAction;
+    [SerializeField] private Animator animator;
     [SerializeField] private float homingSpeed = 20f;     
     [SerializeField] private float rotationSpeed = 200f;       
     [SerializeField] private float bounceUpwardForce = 10f;      
@@ -34,8 +36,8 @@ public class HomingAttackAction : PlayerAction
         Debug.Log($"Target found at position: {target.position}");
         isHoming = true;
 
-        playerPhysics.enabled = false; // Disable player physics temporarily
-        playerPhysics.RB.isKinematic = true; // Set to kinematic to avoid physics interactions
+        playerPhysics.enabled = false;
+        playerPhysics.RB.isKinematic = true;
     }
 
     void FixedUpdate()
@@ -54,6 +56,7 @@ public class HomingAttackAction : PlayerAction
             return;
         }
 
+        animator.SetBool("IsJumping", true);
         Vector3 newPosition = Vector3.MoveTowards(playerPhysics.RB.position, target.position, homingSpeed * Time.deltaTime);
         playerPhysics.RB.MovePosition(newPosition);
 
@@ -80,6 +83,7 @@ public class HomingAttackAction : PlayerAction
         playerPhysics.RB.velocity = Vector3.zero;
 
         playerPhysics.RB.AddForce(Vector3.up * bounceUpwardForce, ForceMode.VelocityChange);
+        jumpAction.currentJumps = 1;
 
         Debug.Log($"Target at position: {target.position} was hit!");
         isHoming = false; 

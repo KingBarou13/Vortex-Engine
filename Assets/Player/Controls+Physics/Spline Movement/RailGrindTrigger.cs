@@ -14,15 +14,26 @@ public class RailGrindTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] private JumpAction jumpAction;
-    [SerializeField] MoveAction moveAction;
+    [SerializeField] private MoveAction moveAction;
     [SerializeField] private GameObject spinBall;
     [SerializeField] private GameObject spinFX;
+    [SerializeField] private Transform playerModel;
+    public float grindHeightOffset = 0.2f;
 
     private static readonly int GrindingHash = Animator.StringToHash("IsGrinding");
     private static readonly int LandOnRailHash = Animator.StringToHash("LandOnRail");
 
     private Vector3 previousPosition;
     private Vector3 grindVelocity;
+    private Vector3 initialModelLocalPosition;
+
+    private void Start()
+    {
+        if (playerModel != null)
+        {
+            initialModelLocalPosition = playerModel.localPosition;
+        }
+    }
 
     private void Update()
     {
@@ -56,6 +67,11 @@ public class RailGrindTrigger : MonoBehaviour
 
             grindVelocity = (railPosition - previousPosition) / Time.deltaTime;
             previousPosition = railPosition;
+
+            if (playerModel != null)
+            {
+                playerModel.localPosition = initialModelLocalPosition + new Vector3(0, grindHeightOffset, 0);
+            }
 
             if (splineProgress <= 0f || splineProgress >= 1f)
             {
@@ -133,5 +149,10 @@ public class RailGrindTrigger : MonoBehaviour
         moveAction.enabled = true;
 
         animator.SetBool(GrindingHash, false);
+
+        if (playerModel != null)
+        {
+            playerModel.localPosition = initialModelLocalPosition;
+        }
     }
 }
