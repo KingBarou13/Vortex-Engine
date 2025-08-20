@@ -1687,6 +1687,7 @@ Transform:
   - {fileID: 420913760}
   - {fileID: 613945220}
   - {fileID: 1016845864}
+  - {fileID: 613005287}
   m_Father: {fileID: 1561457231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &484730532
@@ -1858,6 +1859,61 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 390217713}
   m_SourcePrefab: {fileID: 100100000, guid: 88c2196f7d66f83428d9fccc83202ad4, type: 3}
+--- !u!1 &613005286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 613005287}
+  - component: {fileID: 613005288}
+  m_Layer: 0
+  m_Name: Drift
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &613005287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613005286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 429248686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &613005288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613005286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc283b951e0ff54998acc882d67ffc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPhysics: {fileID: 1172153683}
+  moveAction: {fileID: 613945221}
+  animator: {fileID: 1369306369}
+  driftTurnPower: 5
+  driftDeceleration: 25
+  minDriftSpeed: 10
+  chargeRate: 1
+  maxCharge: 1
+  boostForceMultiplier: 100
+  boostDuration: 0.5
+  player: {fileID: 990517388}
 --- !u!1 &613945219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,6 +3474,8 @@ MonoBehaviour:
   upRange: 2
   moveAction: {fileID: 613945221}
   grindAction: {fileID: 1172153690}
+  driftAction: {fileID: 613005288}
+  cameraManager: {fileID: 728223432}
   rotationSpeed: 10
 --- !u!1 &992935925
 GameObject:
@@ -3865,6 +3923,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044021768}
   m_CullTransparentMesh: 1
+--- !u!1 &1070401381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070401382}
+  m_Layer: 3
+  m_Name: Homing Point
+  m_TagString: Target
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1070401382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070401381}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.1, y: 13.853, z: -21.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1741108826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088387493
 GameObject:
   m_ObjectHideFlags: 0
@@ -10209,6 +10298,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5c28a656-39ba-48f8-adb7-fa84ff139b68
     m_ActionName: Default/Camera Movement[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 613005288}
+        m_TargetAssemblyTypeName: DriftAction, Assembly-CSharp
+        m_MethodName: OnDrift
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0ce2167d-20da-4e93-8d11-e3ece7fc9d5f
+    m_ActionName: Default/Drift[/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default
@@ -10473,7 +10578,7 @@ MonoBehaviour:
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
-  m_Sides: 8
+  m_Sides: 50
   m_SegmentsPerUnit: 4
   m_Capped: 1
   m_Radius: 0.5
@@ -11171,7 +11276,8 @@ Transform:
   m_LocalPosition: {x: -58, y: 0, z: 247.01123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1070401382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1741108827
@@ -12420,7 +12526,7 @@ Transform:
   m_GameObject: {fileID: 2134919228}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.25, y: 7.19, z: -20.11}
+  m_LocalPosition: {x: 68.05, y: 7.5, z: -20.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

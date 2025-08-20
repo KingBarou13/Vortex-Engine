@@ -9,6 +9,8 @@ public class RotationHandler : MonoBehaviour
     [SerializeField] private float upRange = 5;
     [SerializeField] private MoveAction moveAction;
     [SerializeField] private RailGrindTrigger grindAction;
+    [SerializeField] private DriftAction driftAction;
+    [SerializeField] private CameraManager cameraManager;
 
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -18,7 +20,12 @@ public class RotationHandler : MonoBehaviour
         {
             return;
         }
-        if (grindAction.isGrinding)
+
+        if (driftAction != null && driftAction.IsDrifting)
+        {
+            RotateWhileDrifting();
+        }
+        else if (grindAction.isGrinding)
         {
             RotateAccordingToSpline();
         }
@@ -36,6 +43,22 @@ public class RotationHandler : MonoBehaviour
         }
     }
 
+    private void RotateWhileDrifting()
+    {
+        if (cameraManager == null || cameraManager.GetActiveCamera() == null) return;
+
+        Camera activeCamera = cameraManager.GetActiveCamera();
+        Vector3 cameraForward = activeCamera.transform.forward;
+
+        // Project camera forward vector onto the ground plane to get the desired look direction
+        Vector3 lookDirection = Vector3.ProjectOnPlane(cameraForward, referenceObject.up).normalized;
+
+        if (lookDirection.sqrMagnitude > 0.01f)
+        {
+            RotatePlayer(lookDirection);
+        }
+    }
+
     public void RotatePlayer(Vector3 moveDirection)
     {
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection, referenceObject.up);
@@ -49,7 +72,7 @@ public class RotationHandler : MonoBehaviour
 
         if (grindAction.isReversing)
         {
-            tangent = -tangent; 
+            tangent = -tangent;
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(tangent);

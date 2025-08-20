@@ -81,15 +81,15 @@ public class MoveAction : PlayerAction
 
     public void TriggerControlLock(float duration)
     {
-        controlLockActive = true;
+        controlLockActive = duration > 0;
         controlLockTimer = duration;
     }
 
     void Move()
     {
-        if (homingAttackAction != null && homingAttackAction.IsHoming)
+        if (controlLockActive || (homingAttackAction != null && homingAttackAction.IsHoming))
         {
-            return; // Skip movement if homing
+            return;
         }
 
         Vector3 moveVector = GetMoveVector();

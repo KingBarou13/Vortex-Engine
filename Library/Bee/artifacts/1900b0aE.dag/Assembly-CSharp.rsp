@@ -384,6 +384,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Enemies/Egg Spinner/EnemyHover.cs"
+"Assets/Player/Controls+Physics/Actions/DriftAction.cs"
 "Assets/Player/Controls+Physics/Actions/HomingAttackAction.cs"
 "Assets/Player/Controls+Physics/Actions/JumpAction.cs"
 "Assets/Player/Controls+Physics/Actions/MoveAction.cs"

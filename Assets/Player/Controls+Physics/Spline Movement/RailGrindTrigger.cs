@@ -149,6 +149,7 @@ public class RailGrindTrigger : MonoBehaviour
         moveAction.enabled = true;
 
         animator.SetBool(GrindingHash, false);
+        animator.ResetTrigger(LandOnRailHash);
 
         if (playerModel != null)
         {

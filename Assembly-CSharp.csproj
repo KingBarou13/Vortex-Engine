@@ -59,7 +59,7 @@
     <UnityVersion>2022.3.41f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\musun\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.4\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\musun\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -84,6 +84,7 @@
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraOrbit.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\PlayerAction.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Actions\DriftAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\MoveAction.cs" />
   </ItemGroup>
