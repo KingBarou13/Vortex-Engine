@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 14313
+  controlID: 7972
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_SerializedViewValues:
   - C:\Users\musun\Code\Unity Projects\Vortex Engine\Library\PlayModeViewStates\c0bd314b1ee90e74796fc8584f2ba98b
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 1
+  m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 745.75, y: 389.5}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 1
+  m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
@@ -145,8 +145,8 @@ MonoBehaviour:
     y: 0
     width: 386.4
     height: 722.8
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 4}
   m_Panes:
   - {fileID: 4}
@@ -189,9 +189,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: cc850000
-      m_LastClickedID: 34252
-      m_ExpandedIDs: 8ef9ffff0cfbffff968400002a85000098850000ee850000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: c4cdffff0cfbffff987500002e7600009c760000f2760000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -207,7 +207,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 3}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 14314
+  controlID: 7973
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 14290
+  controlID: 7974
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -689,9 +689,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 79, y: 118.7, z: -266}
+    m_Target: {x: 528.3069, y: 71.60683, z: 56.184643}
     speed: 2
-    m_Value: {x: 79, y: 118.7, z: -266}
+    m_Value: {x: 528.3069, y: 71.60683, z: 56.184643}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -737,13 +737,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.197557, y: -0.19096304, z: 0.03925921, w: -0.9607487}
+    m_Target: {x: -0.10098522, y: -0.12738621, z: 0.013038462, w: -0.98661494}
     speed: 2
-    m_Value: {x: -0.19754961, y: -0.19095589, z: 0.039257742, w: -0.96071273}
+    m_Value: {x: -0.100985005, y: -0.12738594, z: 0.013038434, w: -0.9866128}
   m_Size:
-    m_Target: 10
+    m_Target: 95.629944
     speed: 2
-    m_Value: 10
+    m_Value: 95.629944
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -806,14 +806,14 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: 8442030221353297941, guid: ac77cfe40385e6e4a90dcfa549bfc218, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.40980017
+    - e00: 0.5094659
       e01: 0
       e02: 0
-      e03: -59.09941
+      e03: -82.93613
       e10: 0
-      e11: 0.40980017
+      e11: 0.5094659
       e12: 0
-      e13: 20.490028
+      e13: -31.414581
       e20: 0
       e21: 0
       e22: 1
@@ -888,7 +888,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 14315
+  controlID: 8050
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -953,7 +953,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: input
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -963,24 +963,24 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Stage Assets
     m_Globs: []
-    m_OriginalText: input
+    m_OriginalText: 
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 32
   m_LastFolders:
-  - Assets
+  - Assets/Stage Assets
   m_LastFoldersGridSize: 32
   m_LastProjectPath: C:\Users\musun\Gaming\Unity Projects\Vortex-Engine
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: cc830000
-    m_LastClickedID: 33740
-    m_ExpandedIDs: 00000000cc830000d083000000ca9a3b
+    m_SelectedIDs: 9e8a0000
+    m_LastClickedID: 35486
+    m_ExpandedIDs: 00000000a87b0000aa7b0000ac7b0000ba8a00000692000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1008,7 +1008,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 58e5ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000cc830000d083000000ca9a3b
+    m_ExpandedIDs: 00000000a87b0000aa7b0000ac7b0000ba8a00000692000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1033,10 +1033,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: cc850000
-    m_LastClickedInstanceID: 34252
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000e4800000f221ffff00000000f475000096760000c48b0000d2a900004a8800002a770000
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000e4800000f221ffff00000000f475000096760000c48b0000d2a900004a8800002a77000018920000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1052,7 +1052,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 12}
+      m_ClientGUIView: {fileID: 7}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0

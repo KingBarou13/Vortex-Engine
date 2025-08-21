@@ -81,6 +81,9 @@
     <Compile Include="Assets\Player\Controls+Physics\Actions\SpinFX.cs" />
     <Compile Include="Assets\Enemies\Egg Spinner\EnemyHover.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Spline Movement\RailGrindTrigger.cs" />
+    <Compile Include="Assets\Stage Assets\Time Trials\TimeTrialStartGate.cs" />
+    <Compile Include="Assets\Stage Assets\Time Trials\TimeTrialManager.cs" />
+    <Compile Include="Assets\Stage Assets\Time Trials\TimeTrialFinishGate.cs" />
     <Compile Include="Assets\Player\Controls+Physics\NearestTargetFinder.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraOrbit.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\PlayerAction.cs" />

@@ -405,6 +405,9 @@
 "Assets/Player/Controls+Physics/Stage Interactions/DashPanel.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/Launcher.cs"
 "Assets/Stage Assets/Ground/MovingPlatform.cs"
+"Assets/Stage Assets/Time Trials/TimeTrialFinishGate.cs"
+"Assets/Stage Assets/Time Trials/TimeTrialManager.cs"
+"Assets/Stage Assets/Time Trials/TimeTrialStartGate.cs"
 "Assets/UI/Speedometer.cs"
 -langversion:9.0
 /deterministic
