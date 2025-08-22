@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class PlayerPhysics : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerPhysics : MonoBehaviour
     
     [SerializeField] float gravity;
 
+    [SerializeField] private BounceAction bounceAction;
+
 
     //Fixed Update
 
@@ -29,7 +32,7 @@ public class PlayerPhysics : MonoBehaviour
             Gravity();
         }
 
-        if(groundInfo.ground && verticalSpeed < RB.sleepThreshold)
+        if(groundInfo.ground && verticalSpeed < RB.sleepThreshold && (bounceAction == null || !bounceAction.JustRebounded))
             RB.velocity = horizontalVelocity;
 
         StartCoroutine(LateFixedUpdateRoutine());
@@ -53,7 +56,7 @@ public class PlayerPhysics : MonoBehaviour
         Ground();
         Snap();
 
-        if(groundInfo.ground)
+        if(groundInfo.ground && (bounceAction == null || !bounceAction.JustRebounded))
             RB.velocity = horizontalVelocity;
     }
 

@@ -76,9 +76,12 @@ public class JumpAction : PlayerAction
     void OnGroundEnter()
     {
         currentJumps = jumps;
-        animator.SetBool("IsJumping", false);
-        spinBall.SetActive(false);
-        spinFX.SetActive(false);
+        if (animator.GetBool("IsJumping"))
+        {
+            animator.SetBool("IsJumping", false);
+            spinBall.SetActive(false);
+            spinFX.SetActive(false);
+        }
         risingAndFalling.OnJumpEnded();
     }
 

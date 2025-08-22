@@ -15,6 +15,7 @@ public class RailGrindTrigger : MonoBehaviour
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] private JumpAction jumpAction;
     [SerializeField] private MoveAction moveAction;
+    [SerializeField] private BounceAction bounceAction;
     [SerializeField] private GameObject spinBall;
     [SerializeField] private GameObject spinFX;
     [SerializeField] private Transform playerModel;
@@ -102,6 +103,11 @@ public class RailGrindTrigger : MonoBehaviour
 
         isReversing = dotProduct < 0;
         isGrinding = true;
+
+        if (bounceAction != null)
+        {
+            bounceAction.CancelBounce();
+        }
 
         jumpAction.currentJumps = jumpAction.jumps;
 
