@@ -7,6 +7,7 @@ public class SpinFX : MonoBehaviour
 {
     [SerializeField] private float spinSpeed;
     [SerializeField] private Transform referenceObject; // Reference to the object to match y-rotation
+    [SerializeField] private Animator animator;
 
     private Tween spinTween;
 
@@ -23,5 +24,10 @@ public class SpinFX : MonoBehaviour
         // Update y-rotation to match the reference object's y-rotation
         Vector3 currentRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(currentRotation.x, referenceObject.rotation.eulerAngles.y, currentRotation.z);
+
+        if (animator.GetBool("IsJumping") == false)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

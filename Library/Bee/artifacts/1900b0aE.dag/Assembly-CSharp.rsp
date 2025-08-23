@@ -405,6 +405,8 @@
 "Assets/Player/Controls+Physics/Spline Movement/RailGrindTrigger.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/DashPanel.cs"
 "Assets/Player/Controls+Physics/Stage Interactions/Launcher.cs"
+"Assets/Player/Controls+Physics/Stage Interactions/RingCounter.cs"
+"Assets/Player/Controls+Physics/Stage Interactions/Rings.cs"
 "Assets/Stage Assets/Ground/MovingPlatform.cs"
 "Assets/Stage Assets/Time Trials/TimeTrialFinishGate.cs"
 "Assets/Stage Assets/Time Trials/TimeTrialManager.cs"

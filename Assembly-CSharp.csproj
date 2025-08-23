@@ -59,7 +59,7 @@
     <UnityVersion>2022.3.41f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\musun\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\musun\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.3\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -69,6 +69,7 @@
     <Compile Include="Assets\Player\Controls+Physics\Camera Behaviours\CameraSwitchTrigger.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\HomingAttackAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\DashPanel.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\RingCounter.cs" />
     <Compile Include="Assets\Player\Controls+Physics\PlayerPhysics.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\RisingAndFalling.cs" />
     <Compile Include="Assets\Stage Assets\Ground\MovingPlatform.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Player\Controls+Physics\Actions\PlayerAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\DriftAction.cs" />
     <Compile Include="Assets\Player\Controls+Physics\RotationHandler.cs" />
+    <Compile Include="Assets\Player\Controls+Physics\Stage Interactions\Rings.cs" />
     <Compile Include="Assets\Player\Controls+Physics\Actions\MoveAction.cs" />
   </ItemGroup>
   <ItemGroup>

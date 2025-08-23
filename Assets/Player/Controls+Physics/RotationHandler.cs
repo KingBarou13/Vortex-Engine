@@ -65,6 +65,13 @@ public class RotationHandler : MonoBehaviour
         player.rotation = Quaternion.Slerp(player.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
+    public void SetPlayerRotation(Vector3 lookDirection)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(lookDirection, referenceObject.up);
+        player.rotation = targetRotation;
+    }
+
+
 
     void RotateAccordingToSpline()
     {

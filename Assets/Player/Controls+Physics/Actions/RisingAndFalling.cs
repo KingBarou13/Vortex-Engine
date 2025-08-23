@@ -13,8 +13,13 @@ public class RisingAndFalling : MonoBehaviour
     private bool wasJumping = false;
     private float airTime = 0f;
 
+    public bool IsAnimationOverridden { get; set; }
+
     private void Update()
     {
+
+        if (IsAnimationOverridden) return;
+
         bool isGrounded = playerPhysics.groundInfo.ground;
         float verticalSpeed = playerPhysics.verticalSpeed;
 

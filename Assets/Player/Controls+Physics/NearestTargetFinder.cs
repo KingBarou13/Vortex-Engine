@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class NearestTargetFinder : MonoBehaviour
 {
@@ -30,7 +31,9 @@ public class NearestTargetFinder : MonoBehaviour
             return;
         }
 
-        GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
+        GameObject[] taggedTargets = GameObject.FindGameObjectsWithTag(targetTag);
+        GameObject[] springTargets = GameObject.FindGameObjectsWithTag("Spring");
+        GameObject[] targets = taggedTargets.Concat(springTargets).ToArray();
 
         if (targets.Length == 0)
         {

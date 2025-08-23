@@ -9,6 +9,10 @@ TagManager:
   - Dash Panel
   - Trigger Collider
   - Environment
+  - Ring
+  - Spring
+  - Ramp
+  - Dash Ring
   layers:
   - Default
   - TransparentFX

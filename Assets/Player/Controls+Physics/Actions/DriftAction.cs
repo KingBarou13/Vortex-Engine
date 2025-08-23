@@ -33,6 +33,7 @@ public class DriftAction : PlayerAction
     private bool isDriftButtonHeld = false;
     private float driftCharge = 0f;
     private Coroutine boostAnimationCoroutine;
+    private bool isAirCharging = false;
 
     public bool IsDrifting { get; private set; } = false;
 
@@ -44,7 +45,7 @@ public class DriftAction : PlayerAction
 
     public void OnDrift(InputAction.CallbackContext context)
     {
-        if (context.started && groundInfo.ground)
+        if (context.started)
         {
             isDriftButtonHeld = true;
         }
@@ -62,23 +63,36 @@ public class DriftAction : PlayerAction
     void OnEnable()
     {
         playerPhysics.onPlayerPhysicsUpdate += HandleDrift;
+        playerPhysics.onGroundEnter += OnGroundEnter;
     }
 
     void OnDisable()
     {
         playerPhysics.onPlayerPhysicsUpdate -= HandleDrift;
+        playerPhysics.onGroundEnter -= OnGroundEnter;
+    }
+
+    private void OnGroundEnter()
+    {
+        if (isAirCharging && driftCharge > 0.1f)
+        {
+            ApplyBoost();
+        }
+        isAirCharging = false;
     }
 
     private void HandleDrift()
     {
-        // Check if we should be drifting
-        bool canDrift = isDriftButtonHeld && groundInfo.ground;
+        bool onGround = groundInfo.ground;
+        // Prevent drifting if a boost is currently active.
+        bool isBoosting = boostAnimationCoroutine != null;
+        bool canDrift = isDriftButtonHeld && onGround && !isBoosting;
 
         if (canDrift && !IsDrifting)
         {
-            // Start Drifting
             IsDrifting = true;
-            moveAction.TriggerControlLock(float.MaxValue); // Lock regular movement
+            isAirCharging = false; 
+            moveAction.TriggerControlLock(float.MaxValue); 
             animator.SetBool("IsJumping", true);
         }
         else if (!canDrift && IsDrifting)
@@ -94,11 +108,36 @@ public class DriftAction : PlayerAction
             spinBall.SetActive(true);
             spinFX.SetActive(true);
         }
+
+        // --- Air Charge Logic ---
+        if (isDriftButtonHeld && !onGround)
+        {
+            if (!isAirCharging) // Check if we just started air charging
+            {
+                isAirCharging = true;
+                animator.SetBool("IsJumping", true);
+            }
+        }
+
+        if (isAirCharging)
+        {
+            if (driftCharge < maxCharge)
+            {
+                driftCharge += Time.deltaTime * chargeRate;
+            }
+        }
+
+        // If button is released in the air, cancel the charge
+        if (!isDriftButtonHeld && isAirCharging)
+        {
+            isAirCharging = false; 
+            driftCharge = 0f;
+            animator.SetBool("IsJumping", false); // Revert animation
+        }
     }
 
     private void PerformDrift()
     {
-        // Get move direction from MoveAction
         Vector3 moveVector = moveAction.GetMoveVector();
         Vector3 velocity = playerPhysics.horizontalVelocity;
         
@@ -117,32 +156,37 @@ public class DriftAction : PlayerAction
     private void ReleaseDrift()
     {
         IsDrifting = false;
-        moveAction.TriggerControlLock(0); // Release movement lock
+        moveAction.TriggerControlLock(0); 
         
         if (boostAnimationCoroutine != null)
         {
             StopCoroutine(boostAnimationCoroutine);
         }
 
-        if (driftCharge > 0.1f) // Only boost if there's some charge
+        if (driftCharge > 0.1f) 
         {
-            // 3. Apply boost on release in the direction the player is facing
-            Vector3 boostDirection = player.transform.forward;
-            float boostMagnitude = driftCharge * boostForceMultiplier;
-
-            // This sets the horizontal velocity directly, overriding sideways momentum.
-            RB.velocity = boostDirection * boostMagnitude + playerPhysics.verticalVelocity;
-
-            moveAction.TriggerControlLock(boostDuration);
-            boostAnimationCoroutine = StartCoroutine(EndBoostAnimation(boostDuration));
+            ApplyBoost();
         }
         else
         {
             animator.SetBool("IsJumping", false);
+            spinBall.SetActive(false);
+            spinFX.SetActive(false);
         }
 
-        // Reset charge
         driftCharge = 0f;
+    }
+
+    private void ApplyBoost()
+    {
+        Vector3 boostDirection = player.transform.forward;
+        float boostMagnitude = driftCharge * boostForceMultiplier;
+
+        RB.velocity = boostDirection * boostMagnitude + playerPhysics.verticalVelocity;
+
+        moveAction.TriggerControlLock(boostDuration);
+        animator.SetBool("IsJumping", true);
+        boostAnimationCoroutine = StartCoroutine(EndBoostAnimation(boostDuration));
     }
 
     private IEnumerator EndBoostAnimation(float duration)
@@ -150,7 +194,6 @@ public class DriftAction : PlayerAction
         Camera activeCamera = cameraManager.GetActiveCamera();
         float startTime = Time.time;
 
-        // Boost phase: increase FOV
         while (Time.time < startTime + duration)
         {
             activeCamera.fieldOfView = Mathf.Lerp(activeCamera.fieldOfView, boostFOV, fovChangeSpeed * Time.deltaTime);
