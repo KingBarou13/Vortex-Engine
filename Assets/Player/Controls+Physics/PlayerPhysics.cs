@@ -13,6 +13,8 @@ public class PlayerPhysics : MonoBehaviour
 
     public float speed => horizontalVelocity.magnitude;
 
+    public bool DisableGroundCheck { get; set; }
+
     
     [SerializeField] float gravity;
 
@@ -32,7 +34,7 @@ public class PlayerPhysics : MonoBehaviour
             Gravity();
         }
 
-        if(groundInfo.ground && verticalSpeed < RB.sleepThreshold && (bounceAction == null || !bounceAction.JustRebounded))
+        if(groundInfo.ground && verticalSpeed < RB.sleepThreshold && (bounceAction == null || !bounceAction.JustRebounded) && !DisableGroundCheck)
             RB.velocity = horizontalVelocity;
 
         StartCoroutine(LateFixedUpdateRoutine());
@@ -56,7 +58,7 @@ public class PlayerPhysics : MonoBehaviour
         Ground();
         Snap();
 
-        if(groundInfo.ground && (bounceAction == null || !bounceAction.JustRebounded))
+        if(groundInfo.ground && (bounceAction == null || !bounceAction.JustRebounded) && !DisableGroundCheck)
             RB.velocity = horizontalVelocity;
     }
 
